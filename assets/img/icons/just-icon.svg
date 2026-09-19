@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Just app icoon">
+  <rect x="0" y="0" width="200" height="200" rx="44" fill="#5578F6"/>
+  <path d="M64 40 C64 34.4772 68.4772 30 74 30 C79.5228 30 84 34.4772 84 40 L84 54 L64 54 Z" fill="#fff"/>
+  <path d="M74 22 C76 14 84 10 90 16 C96 10 104 14 106 22 C108 30 100 38 90 46 C80 38 72 30 74 22 Z" fill="#F9D22D"/>
+  <path d="M28 108 L96 54 C99.5 51.2 104.5 51.2 108 54 L176 108" stroke="#fff" stroke-width="15" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M44 94 L44 148 C44 161 54.5 172 68 172 L136 172 C149.5 172 160 161 160 148 L160 94" stroke="#fff" stroke-width="15" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="102" cy="126" r="42" fill="#fff"/>
+  <path d="M102 105 L102 128 L120 138" stroke="#EA5F38" stroke-width="9" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="102" cy="128" r="6.5" fill="#EA5F38"/>
+</svg>
