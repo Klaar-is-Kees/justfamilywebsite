@@ -101,16 +101,42 @@
 
   <section class="section">
     <div class="container grid-2">
-      <div class="card">
-        <h3>Algemeen</h3>
-        <p>We leggen graag uit wat Just voor je kan betekenen en komen graag bij je langs.</p>
+      <div class="card" data-reveal>
+        <h3>Stuur ons een bericht</h3>
+        <form id="contact-form" novalidate>
+          <div class="form-group">
+            <label for="naam">Naam</label>
+            <input type="text" id="naam" name="naam" required autocomplete="name">
+          </div>
+          <div class="form-group">
+            <label for="email">E-mailadres</label>
+            <input type="email" id="email" name="email" required autocomplete="email">
+          </div>
+          <div class="form-group">
+            <label for="bericht">Bericht</label>
+            <textarea id="bericht" name="bericht" rows="5" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Versturen</button>
+          <p class="form-feedback" id="contact-feedback" role="status"></p>
+        </form>
+        <p style="margin-top:8px; color:#6b6b70; font-size:var(--fs-small);">Dit opent je eigen mailprogramma met het bericht klaar om te versturen &mdash; er wordt niets automatisch verzonden vanaf de site.</p>
+      </div>
+      <div class="card" data-reveal>
+        <h3>Direct contact</h3>
+        <p><strong>Algemeen</strong><br>We leggen graag uit wat Just voor je kan betekenen en komen graag bij je langs.</p>
         <p><strong>E-mail</strong><br><a href="mailto:info@justfamily.nl">info@justfamily.nl</a></p>
         <p><strong>Telefoon</strong><br><a href="tel:+31612673437">+31 6 12673437</a></p>
+        <p style="margin-top:24px;"><strong>Elien van Riet</strong> — CEO &amp; Founder<br><a href="mailto:elien@justfamily.nl">elien@justfamily.nl</a></p>
+        <div style="margin-top:24px;">
+          <h4 style="margin-bottom:6px;">Volg Just</h4>
+          <div class="social-links social-links--dark">
+      <a href="https://www.instagram.com/just_family_ai/" target="_blank" rel="noopener noreferrer" aria-label="Just op Instagram"><span class="social-icon" style="--icon:url(/assets/img/icons/social/instagram.svg);"></span></a>
+      <a href="https://www.facebook.com/profile.php?id=61588828659085" target="_blank" rel="noopener noreferrer" aria-label="Just op Facebook"><span class="social-icon" style="--icon:url(/assets/img/icons/social/facebook.svg);"></span></a>
+      <a href="https://elienvanriet.substack.com/" target="_blank" rel="noopener noreferrer" aria-label="Just op Substack"><span class="social-icon" style="--icon:url(/assets/img/icons/social/substack.svg);"></span></a>
+      <a href="https://wa.me/31612673437" target="_blank" rel="noopener noreferrer" aria-label="Just op WhatsApp"><span class="social-icon" style="--icon:url(/assets/img/icons/social/whatsapp.svg);"></span></a>
       </div>
-      <div class="card">
-        <h3>Elien van Riet</h3>
-        <p>CEO &amp; Founder</p>
-        <p><a href="mailto:elien@justfamily.nl">elien@justfamily.nl</a></p>
+
+        </div>
         <div data-lottie="/assets/lottie/plant-2.json" style="max-width:160px; margin-top:20px;"></div>
       </div>
     </div>
@@ -129,6 +155,13 @@
       <div>
         <img src="/assets/img/logo/justfamily-logo.png" alt="Just family" style="height:40px; margin-bottom:16px;">
         <p style="max-width:38ch; opacity:0.8;">Just is de AI-assistent die het huishouden en de mentale last eerlijk verdeelt tussen jou, je partner en je gezin — zodat er weer tijd overblijft voor elkaar.</p>
+        <div class="social-links">
+      <a href="https://www.instagram.com/just_family_ai/" target="_blank" rel="noopener noreferrer" aria-label="Just op Instagram"><span class="social-icon" style="--icon:url(/assets/img/icons/social/instagram.svg);"></span></a>
+      <a href="https://www.facebook.com/profile.php?id=61588828659085" target="_blank" rel="noopener noreferrer" aria-label="Just op Facebook"><span class="social-icon" style="--icon:url(/assets/img/icons/social/facebook.svg);"></span></a>
+      <a href="https://elienvanriet.substack.com/" target="_blank" rel="noopener noreferrer" aria-label="Just op Substack"><span class="social-icon" style="--icon:url(/assets/img/icons/social/substack.svg);"></span></a>
+      <a href="https://wa.me/31612673437" target="_blank" rel="noopener noreferrer" aria-label="Just op WhatsApp"><span class="social-icon" style="--icon:url(/assets/img/icons/social/whatsapp.svg);"></span></a>
+      </div>
+
       </div>
       <div>
         <h4>Just</h4>
@@ -161,6 +194,15 @@
     </div>
   </div>
 </footer>
+
+<div class="cookie-banner" id="cookie-banner" hidden role="dialog" aria-label="Cookiemelding">
+  <p>We gebruiken alleen functionele cookies om de site goed te laten werken. Lees ons <a href="/cookiebeleid.html">cookiebeleid</a>.</p>
+  <div class="cookie-actions">
+    <button id="cookie-decline" class="btn btn-outline" style="border-color:#fff;">Weigeren</button>
+    <button id="cookie-accept" class="btn btn-yellow">Akkoord</button>
+  </div>
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/lottie-web@5.12.2/build/player/lottie.min.js"></script>
 <script src="/assets/js/main.js"></script>
 </body>
