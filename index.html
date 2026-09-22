@@ -240,16 +240,23 @@
       <h2>De volgende experts adviseren Just</h2>
       <p class="lead">Just laat zich adviseren door specialisten op het gebied van relaties, technologie en ondernemerschap, zodat de app gebouwd blijft op praktijkkennis in plaats van aannames.</p>
 
-      <div class="expert-grid">
+    <div class="carousel" data-carousel>
+      <button class="carousel-btn carousel-btn--prev" data-carousel-prev aria-label="Vorige experts" type="button">&#8249;</button>
+      <div class="carousel-track expert-grid" data-carousel-track>
         <div class="expert-card" data-reveal>
           <div class="expert-avatar bg-blue">NB</div>
           <h3>Niels Bartels</h3>
           <p style="color:#55555a;">Cofounder Suniverse</p>
         </div>
         <div class="expert-card" data-reveal>
-          <div class="expert-avatar bg-pink">VF</div>
-          <h3>Veronne &amp; Fleur van der Meijs</h3>
-          <p style="color:#55555a;">Relatietherapeuten, Bureau Liefhebbers</p>
+          <div class="expert-avatar bg-pink">VM</div>
+          <h3>Veronne van der Meijs</h3>
+          <p style="color:#55555a;">Relatietherapeut, Bureau Liefhebbers</p>
+        </div>
+        <div class="expert-card" data-reveal>
+          <div class="expert-avatar" style="background:var(--color-orange);">FM</div>
+          <h3>Fleur van der Meijs</h3>
+          <p style="color:#55555a;">Relatietherapeut, Bureau Liefhebbers</p>
         </div>
         <div class="expert-card" data-reveal>
           <div class="expert-avatar" style="background:var(--color-teal);">AK</div>
@@ -257,6 +264,14 @@
           <p style="color:#55555a;">GP, Visible Investments</p>
         </div>
       </div>
+       <div class="expert-card" data-reveal>
+          <div class="expert-avatar" style="background:var(--color-yellow);">GW</div>
+         <h3>Gerda de Weerdt-Hazenberg</h3>
+          <p style="color:#55555a;">Relatietherapeut</p>
+        </div>
+      <button class="carousel-btn carousel-btn--next" data-carousel-next aria-label="Volgende experts" type="button">&#8250;</button>
+      <div class="carousel-dots" data-carousel-dots></div>
+    </div>
     </div>
   </section>
 
