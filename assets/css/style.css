@@ -233,8 +233,11 @@ ul { padding-left: 1.2em; }
   display: flex; align-items: center; justify-content: center;
   font-weight: 800; color: #fff; font-size: 1.2rem;
   margin-bottom: 16px;
+  object-fit: cover;
 }
+img.expert-avatar { border: 3px solid var(--color-off-white); }
 @media (max-width: 880px) { .expert-grid { grid-template-columns: 1fr; } }
+
 
 /* ---------- Team ---------- */
 .team-grid {
