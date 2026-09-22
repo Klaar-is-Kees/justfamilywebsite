@@ -1,0 +1,11 @@
+Zet hier de goedgekeurde foto's van de externe adviseurs neer, exact met deze bestandsnamen:
+
+- niels-bartels.jpg
+- arthur-kramer.jpg
+- veronne-fleur-van-der-meijs.jpg   (gezamenlijke foto, of gebruik aparte bestanden en pas expert_photo() aan)
+- gerda-de-weerdt-hazenberg.jpg     (deze staat al elders op de site, zie assets/img/team/)
+
+Vierkant formaat, minimaal 300x300px, met toestemming van de betreffende persoon voor gebruik op justfamily.nl.
+
+Zodra een bestand hier staat, toont de site automatisch de foto in plaats van de initialen-avatar
+(zie expert_photo() in generate_common.py — geen verdere code-aanpassing nodig).
