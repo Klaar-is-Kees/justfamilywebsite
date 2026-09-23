@@ -215,29 +215,70 @@ ul { padding-left: 1.2em; }
 
 /* ---------- Experts / advisors ---------- */
 .expert-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
   gap: 28px;
+  margin-top: 0;
+}
+.expert-grid .expert-card {
+  flex: 0 0 calc(25% - 21px);
+}
+@media (max-width: 1024px) { .expert-grid .expert-card { flex-basis: calc(50% - 14px); } }
+@media (max-width: 600px) { .expert-grid .expert-card { flex-basis: 82%; } }
+
+/* ---------- Carousel (experts) ---------- */
+.carousel {
+  position: relative;
   margin-top: 40px;
 }
-.expert-card {
-  background: #fff;
-  border-radius: var(--radius-m);
-  padding: 28px;
-  text-align: left;
-  box-shadow: var(--shadow-soft);
+.carousel-track {
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  padding: 4px 4px 18px;
+  margin: 0 -4px;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
 }
-.expert-avatar {
-  width: 64px; height: 64px;
+.carousel-track::-webkit-scrollbar { display: none; }
+.carousel-track > * { scroll-snap-align: start; }
+.carousel-btn {
+  position: absolute;
+  top: 35%;
+  transform: translateY(-50%);
+  width: 44px; height: 44px;
   border-radius: 50%;
+  border: none;
+  background: #fff;
+  color: var(--color-soft-black);
+  box-shadow: var(--shadow-soft);
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  z-index: 5;
   display: flex; align-items: center; justify-content: center;
-  font-weight: 800; color: #fff; font-size: 1.2rem;
-  margin-bottom: 16px;
-  object-fit: cover;
+  transition: opacity 0.2s ease, transform 0.15s ease;
 }
-img.expert-avatar { border: 3px solid var(--color-off-white); }
-@media (max-width: 880px) { .expert-grid { grid-template-columns: 1fr; } }
-
+.carousel-btn:hover { transform: translateY(-50%) scale(1.06); }
+.carousel-btn:disabled { opacity: 0.3; cursor: default; }
+.carousel-btn--prev { left: -22px; }
+.carousel-btn--next { right: -22px; }
+.carousel-dots {
+  display: flex; justify-content: center; gap: 8px;
+  margin-top: 4px;
+}
+.carousel-dots button {
+  width: 8px; height: 8px; border-radius: 50%;
+  border: none; padding: 0; cursor: pointer;
+  background: var(--color-light-grey);
+  transition: all 0.2s ease;
+}
+.carousel-dots button.is-active {
+  background: var(--color-primary-blue);
+  width: 22px; border-radius: 4px;
+}
+@media (max-width: 640px) {
+  .carousel-btn { display: none; }
+}
 
 /* ---------- Team ---------- */
 .team-grid {
