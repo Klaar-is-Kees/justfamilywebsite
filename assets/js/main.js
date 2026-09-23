@@ -198,7 +198,62 @@ document.addEventListener('DOMContentLoaded', function () {
     if (acceptBtn) acceptBtn.addEventListener('click', function () { setConsent('accepted'); });
     if (declineBtn) declineBtn.addEventListener('click', function () { setConsent('declined'); });
   }
+  
+  // --- Carousel (bv. experts-sectie) ---
+  function debounce(fn, wait) {
+    var t;
+    return function () {
+      var args = arguments;
+      clearTimeout(t);
+      t = setTimeout(function () { fn.apply(null, args); }, wait);
+    };
+  }
 
+  document.querySelectorAll('[data-carousel]').forEach(function (carousel) {
+    var track = carousel.querySelector('[data-carousel-track]');
+    var prevBtn = carousel.querySelector('[data-carousel-prev]');
+    var nextBtn = carousel.querySelector('[data-carousel-next]');
+    var dotsWrap = carousel.querySelector('[data-carousel-dots]');
+    var items = track ? track.children : [];
+    if (!track || !items.length) return;
+
+    var dots = [];
+    if (dotsWrap) {
+      Array.prototype.forEach.call(items, function (item, i) {
+        var dot = document.createElement('button');
+        dot.type = 'button';
+        dot.setAttribute('aria-label', 'Ga naar ' + (i + 1));
+        dot.addEventListener('click', function () { scrollToIndex(i); });
+        dotsWrap.appendChild(dot);
+        dots.push(dot);
+      });
+    }
+
+    function getStep() {
+      var styles = window.getComputedStyle(track);
+      var gap = parseFloat(styles.gap || styles.columnGap || 28);
+      return items[0].getBoundingClientRect().width + gap;
+    }
+
+    function scrollToIndex(i) {
+      track.scrollTo({ left: i * getStep(), behavior: 'smooth' });
+    }
+
+    function updateControls() {
+      var step = getStep();
+      var index = Math.round(track.scrollLeft / step);
+      dots.forEach(function (d, i) { d.classList.toggle('is-active', i === index); });
+      if (prevBtn) prevBtn.disabled = track.scrollLeft <= 4;
+      if (nextBtn) nextBtn.disabled = track.scrollLeft >= track.scrollWidth - track.clientWidth - 4;
+    }
+
+    if (prevBtn) prevBtn.addEventListener('click', function () { track.scrollBy({ left: -getStep(), behavior: 'smooth' }); });
+    if (nextBtn) nextBtn.addEventListener('click', function () { track.scrollBy({ left: getStep(), behavior: 'smooth' }); });
+    track.addEventListener('scroll', debounce(updateControls, 80), { passive: true });
+    window.addEventListener('resize', debounce(updateControls, 150));
+    updateControls();
+  });
+  
   // --- Jaartal in footer ---
   var yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
