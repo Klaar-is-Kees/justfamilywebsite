@@ -2,6 +2,16 @@
 // Laadt Lottie-animaties lui in (alleen als lottie-web geladen is en het element in beeld komt)
 
 document.addEventListener('DOMContentLoaded', function () {
+  // Kleine helper, op meerdere plekken in dit bestand gebruikt
+  function debounce(fn, wait) {
+    var t;
+    return function () {
+      var args = arguments;
+      clearTimeout(t);
+      t = setTimeout(function () { fn.apply(null, args); }, wait);
+    };
+  }
+
   // --- Lottie animaties ---
   var lottieEls = document.querySelectorAll('[data-lottie]');
   if (lottieEls.length && window.lottie) {
@@ -198,63 +208,96 @@ document.addEventListener('DOMContentLoaded', function () {
     if (acceptBtn) acceptBtn.addEventListener('click', function () { setConsent('accepted'); });
     if (declineBtn) declineBtn.addEventListener('click', function () { setConsent('declined'); });
   }
-  
-  // --- Carousel (bv. experts-sectie) ---
-  function debounce(fn, wait) {
-    var t;
-    return function () {
-      var args = arguments;
-      clearTimeout(t);
-      t = setTimeout(function () { fn.apply(null, args); }, wait);
-    };
-  }
 
+  // --- Carousel (bv. experts-sectie): automatisch doorschuiven + pijlen ---
   document.querySelectorAll('[data-carousel]').forEach(function (carousel) {
     var track = carousel.querySelector('[data-carousel-track]');
     var prevBtn = carousel.querySelector('[data-carousel-prev]');
     var nextBtn = carousel.querySelector('[data-carousel-next]');
     var dotsWrap = carousel.querySelector('[data-carousel-dots]');
-    var items = track ? track.children : [];
+    var items = track ? Array.prototype.slice.call(track.children) : [];
     if (!track || !items.length) return;
 
+    var currentIndex = 0;
+    var autoplayDelay = 4500;
+    var autoplayTimer = null;
+
+    // Dots opnieuw opbouwen (voorkomt dubbele dots bij een herlaad van dit script)
     var dots = [];
     if (dotsWrap) {
-      Array.prototype.forEach.call(items, function (item, i) {
+      dotsWrap.innerHTML = '';
+      items.forEach(function (item, i) {
         var dot = document.createElement('button');
         dot.type = 'button';
-        dot.setAttribute('aria-label', 'Ga naar ' + (i + 1));
-        dot.addEventListener('click', function () { scrollToIndex(i); });
+        dot.setAttribute('aria-label', 'Ga naar kaart ' + (i + 1));
+        dot.addEventListener('click', function () { goTo(i); restartAutoplay(); });
         dotsWrap.appendChild(dot);
         dots.push(dot);
       });
     }
 
     function getStep() {
-      var styles = window.getComputedStyle(track);
-      var gap = parseFloat(styles.gap || styles.columnGap || 28);
+      var trackStyles = window.getComputedStyle(track);
+      var gap = parseFloat(trackStyles.columnGap || trackStyles.gap) || 0;
       return items[0].getBoundingClientRect().width + gap;
     }
 
-    function scrollToIndex(i) {
-      track.scrollTo({ left: i * getStep(), behavior: 'smooth' });
+    function goTo(index) {
+      currentIndex = (index + items.length) % items.length; // oneindige lus
+      track.scrollTo({ left: currentIndex * getStep(), behavior: 'smooth' });
+      updateUI();
     }
 
-    function updateControls() {
-      var step = getStep();
-      var index = Math.round(track.scrollLeft / step);
-      dots.forEach(function (d, i) { d.classList.toggle('is-active', i === index); });
-      if (prevBtn) prevBtn.disabled = track.scrollLeft <= 4;
-      if (nextBtn) nextBtn.disabled = track.scrollLeft >= track.scrollWidth - track.clientWidth - 4;
+    function next() { goTo(currentIndex + 1); }
+    function prev() { goTo(currentIndex - 1); }
+
+    function updateUI() {
+      dots.forEach(function (d, i) { d.classList.toggle('is-active', i === currentIndex); });
+      // Oneindige lus: pijlen blijven altijd klikbaar
+      if (prevBtn) prevBtn.disabled = false;
+      if (nextBtn) nextBtn.disabled = false;
     }
 
-    if (prevBtn) prevBtn.addEventListener('click', function () { track.scrollBy({ left: -getStep(), behavior: 'smooth' }); });
-    if (nextBtn) nextBtn.addEventListener('click', function () { track.scrollBy({ left: getStep(), behavior: 'smooth' }); });
-    track.addEventListener('scroll', debounce(updateControls, 80), { passive: true });
-    window.addEventListener('resize', debounce(updateControls, 150));
-    updateControls();
+    function startAutoplay() {
+      stopAutoplay();
+      autoplayTimer = setInterval(next, autoplayDelay);
+    }
+    function stopAutoplay() {
+      if (autoplayTimer) clearInterval(autoplayTimer);
+      autoplayTimer = null;
+    }
+    function restartAutoplay() { startAutoplay(); }
+
+    if (prevBtn) prevBtn.addEventListener('click', function () { prev(); restartAutoplay(); });
+    if (nextBtn) nextBtn.addEventListener('click', function () { next(); restartAutoplay(); });
+
+    // Pauzeer bij hover/focus/aanraken, hervat zodra de bezoeker weggaat
+    carousel.addEventListener('mouseenter', stopAutoplay);
+    carousel.addEventListener('mouseleave', startAutoplay);
+    carousel.addEventListener('focusin', stopAutoplay);
+    carousel.addEventListener('focusout', startAutoplay);
+    carousel.addEventListener('touchstart', stopAutoplay, { passive: true });
+
+    // Houd de actieve dot in sync als iemand handmatig sleept/swiped
+    track.addEventListener('scroll', debounce(function () {
+      var index = Math.round(track.scrollLeft / getStep());
+      currentIndex = Math.max(0, Math.min(items.length - 1, index));
+      updateUI();
+    }, 100), { passive: true });
+
+    window.addEventListener('resize', debounce(function () { goTo(currentIndex); }, 150));
+
+    updateUI();
+    startAutoplay();
+
+    // Pauzeer autoplay als het tabblad niet actief is (bespaart resources/batterij)
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) stopAutoplay(); else startAutoplay();
+    });
   });
-  
+
   // --- Jaartal in footer ---
   var yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 });
+
