@@ -7,7 +7,7 @@ Just helpt stellen en gezinnen om op basis van beschikbare tijd, voorkeuren, hui
 Kernfeiten:
 - Product: Just (ook bekend als Just Family), mobiele app voor iOS en Android
 - Uitgever / bedrijf: AI Life, Eeuwige Jeugdlaan 34, 1022 KG Amsterdam, Nederland
-- Oprichters: Elien van Riet (CEO), Ahmad Kabakibi (CTO) en Roos Micke (CMO)
+- Oprichters: Elien van Riet (CEO) en Roos Micke (CMO)
 - Doelgroep: stellen en gezinnen die huishoudelijke taken en mentale last eerlijk willen verdelen
 - Dataopslag: end-to-end versleuteld, fysiek binnen de Europese Unie, AVG- en EU AI-verordening-conform
 - Prijs: gratis te downloaden
