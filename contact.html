@@ -6,6 +6,9 @@
 <title>Contact — Just</title>
 <meta name="description" content="Benieuwd hoe Just jouw organisatie kan helpen, of wil je samenwerken? Neem contact op met het team van Just.">
 <link rel="canonical" href="https://justfamily.nl/contact.html">
+<link rel="alternate" hreflang="nl" href="https://justfamily.nl/contact.html">
+<link rel="alternate" hreflang="en" href="https://justfamily.nl/en/contact.html">
+<link rel="alternate" hreflang="x-default" href="https://justfamily.nl/contact.html">
 
 <!-- Open Graph / social -->
 <meta property="og:type" content="website">
@@ -15,6 +18,7 @@
 <meta property="og:url" content="https://justfamily.nl/contact.html">
 <meta property="og:image" content="https://justfamily.nl/assets/img/og-image.png">
 <meta property="og:locale" content="nl_NL">
+<meta property="og:locale:alternate" content="en_GB">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Contact — Just">
 <meta name="twitter:description" content="Benieuwd hoe Just jouw organisatie kan helpen, of wil je samenwerken? Neem contact op met het team van Just.">
@@ -82,6 +86,7 @@
       </ul>
     </nav>
     <div class="nav-cta">
+      <a class="lang-switch" href="/en/contact.html" hreflang="en" lang="en" translate="no" aria-label="English version">EN</a>
       <a href="/index.html#download" class="btn btn-yellow">Download de app</a>
       <button class="nav-toggle btn btn-outline" aria-expanded="false" aria-label="Menu">Menu</button>
     </div>
@@ -103,7 +108,7 @@
     <div class="container grid-2">
       <div class="card" data-reveal>
         <h3>Stuur ons een bericht</h3>
-        <form id="contact-form" novalidate>
+        <form id="contact-form" novalidate data-msg-invalid="Vul je naam, een geldig e-mailadres en je bericht in." data-msg-success="Je mailprogramma opent met je bericht klaar om te versturen naar info@justfamily.nl.">
           <div class="form-group">
             <label for="naam">Naam</label>
             <input type="text" id="naam" name="naam" required autocomplete="name">
