@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Steun Just — crowdfundingcampagne, doneer vóór 2 november</title>
+<meta name="description" content="Help Just het debat over mentale last in huis en op kantoor te organiseren en de AI-Agent verder te bouwen. Doneer via Mollie, Stripe of bankoverschrijving — campagne loopt tot 2 november.">
+<link rel="canonical" href="https://justfamily.nl/campagne.html">
+
+<!-- Open Graph / social -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Just">
+<meta property="og:title" content="Steun Just — crowdfundingcampagne, doneer vóór 2 november">
+<meta property="og:description" content="Help Just het debat over mentale last in huis en op kantoor te organiseren en de AI-Agent verder te bouwen. Doneer via Mollie, Stripe of bankoverschrijving.">
+<meta property="og:url" content="https://justfamily.nl/campagne.html">
+<meta property="og:image" content="https://justfamily.nl/assets/img/og-image.png">
+<meta property="og:locale" content="nl_NL">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Steun Just — crowdfundingcampagne, doneer vóór 2 november">
+<meta name="twitter:description" content="Help Just het debat over mentale last in huis en op kantoor te organiseren en de AI-Agent verder te bouwen.">
+
+<!-- Favicons -->
+<link rel="icon" href="/assets/img/favicon.ico" sizes="any">
+<link rel="icon" href="/assets/img/icons/just-icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#5578f6">
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="/assets/css/style.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": "https://justfamily.nl/#organization",
+  "name": "Just",
+  "alternateName": ["Justfamily", "Just Family", "AI Life"],
+  "url": "https://justfamily.nl",
+  "logo": "https://justfamily.nl/assets/img/icon-512.png",
+  "email": "info@justfamily.nl"
+}
+</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Direct naar inhoud</a>
+<header class="site-header">
+  <div class="container">
+    <a class="logo" href="/index.html">
+      <img src="/assets/img/logo/justfamily-logo.png" alt="Just family — logo" style="height:44px; width:auto;">
+    </a>
+    <nav aria-label="Hoofdmenu">
+      <ul class="nav-links">
+        <li><a href="/index.html#hoe-het-werkt">Hoe het werkt</a></li>
+        <li><a href="/over-just.html">Over Just</a></li>
+        <li><a href="/index.html#experts">Experts</a></li>
+        <li><a href="/faq.html">FAQ</a></li>
+        <li><a href="/contact.html">Contact</a></li>
+        <li><a href="/campagne.html" aria-current="page">Crowdfunding</a></li>
+      </ul>
+    </nav>
+    <div class="nav-cta">
+      <a href="#doneer" class="btn btn-yellow">Doneer nu</a>
+      <button class="nav-toggle btn btn-outline" aria-expanded="false" aria-label="Menu">Menu</button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ============ HERO + COUNTDOWN + TELLER ============ -->
+  <section class="hero bg-blue" style="padding-bottom:64px;">
+    <div class="container" style="grid-template-columns:1fr; text-align:center;">
+      <div>
+        <span class="hero-eyebrow">Crowdfundingcampagne</span>
+        <h1>Help Just het debat over mentale last naar het podium brengen</h1>
+        <p class="lead mx-auto" style="color:#fff; opacity:0.92;">We organiseren een publiek debat over de ongelijke verdeling van mentale last — thuis én op de werkvloer — en bouwen tegelijk verder aan de AI-Agent die gezinnen daarbij helpt. Met jouw steun maken we dat mogelijk.</p>
+
+        <div id="countdown-closed-wrap">
+          <div id="campaign-closed-banner" class="hero-eyebrow" style="background:#fff; color:var(--color-soft-black); display:block; margin:20px auto 0; max-width:420px;" hidden>
+            De campagne is gesloten. Bedankt aan iedereen die heeft bijgedragen! Vragen? <a href="/contact.html">Neem contact op</a>.
+          </div>
+        </div>
+
+        <div class="countdown" id="countdown" data-deadline="2026-11-02T23:59:59+01:00">
+          <div class="countdown-unit"><span class="num" id="cd-days">–</span><span class="label">dagen</span></div>
+          <div class="countdown-unit"><span class="num" id="cd-hours">–</span><span class="label">uur</span></div>
+          <div class="countdown-unit"><span class="num" id="cd-minutes">–</span><span class="label">min</span></div>
+          <div class="countdown-unit"><span class="num" id="cd-seconds">–</span><span class="label">sec</span></div>
+        </div>
+        <p style="color:#fff; opacity:0.75; font-size:var(--fs-small); margin-top:-10px;">Campagne loopt tot en met 2 november</p>
+
+        <div id="campaign-progress" class="campaign-progress" style="margin-top:32px;">
+          <span class="campaign-live-dot"></span><span style="font-size:var(--fs-small); color:#6b6b70; font-weight:700;">LIVE</span>
+          <div style="margin-top:8px;">
+            <span class="raised" id="amount-raised">€0</span>
+            <span class="goal"> van <span id="amount-goal">€25.000</span> doel</span>
+          </div>
+          <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+          <div class="campaign-stats">
+            <span><strong id="donor-count">0</strong> donateurs</span>
+            <span>Laatst bijgewerkt: <span id="last-updated">zojuist</span></span>
+          </div>
+        </div>
+
+        <div class="badge-row" style="margin-top:28px; justify-content:center;">
+          <a href="#doneer" class="btn btn-yellow">Doneer nu</a>
+          <a href="#pakketten" class="btn btn-outline" style="color:#fff;">Bekijk de pakketten</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PAKKETTEN ============ -->
+  <section class="section" id="pakketten">
+    <div class="container">
+      <span class="eyebrow">Jouw bijdrage</span>
+      <h2>Kies een pakket</h2>
+      <p class="lead">Elk bedrag helpt. Vanaf €35 ben je erbij, en hoe hoger de bijdrage, hoe meer zichtbaarheid en toegang je krijgt.</p>
+
+      <div class="tier-grid">
+        <div class="tier-card">
+          <div class="tier-amount">€35</div>
+          <div class="tier-name">Debatbezoeker</div>
+          <p class="tier-desc">VIP-plek bij het debat.</p>
+          <button class="btn btn-primary" data-select-tier="35">Kies dit pakket</button>
+        </div>
+
+        <div class="tier-card tier-card--featured">
+          <span class="tier-badge">Populair</span>
+          <div class="tier-amount">€60</div>
+          <div class="tier-name">Founding Family Member</div>
+          <p class="tier-desc">VIP-plek bij het debat + vroege toegang tot de AI-Agent.</p>
+          <button class="btn btn-primary" data-select-tier="60">Kies dit pakket</button>
+        </div>
+
+        <div class="tier-card">
+          <div class="tier-amount">€750</div>
+          <div class="tier-name">Bedrijf</div>
+          <p class="tier-desc">Logo bij het event.</p>
+          <button class="btn btn-primary" data-select-tier="750">Kies dit pakket</button>
+        </div>
+
+        <div class="tier-card">
+          <div class="tier-amount">€1.500</div>
+          <div class="tier-name">Debatpartner</div>
+          <p class="tier-desc">Genoemd vanaf het podium, logo op de schermen, en een sessie over mentale last op kantoor.</p>
+          <button class="btn btn-primary" data-select-tier="1500">Kies dit pakket</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DONATIEFORMULIER ============ -->
+  <section class="section bg-off" id="doneer">
+    <div class="container" style="max-width:720px;">
+      <span class="eyebrow">Doneren</span>
+      <h2>Rond je donatie af</h2>
+
+      <form id="donate-form" class="donate-form" action="https://formspree.io/f/VERVANG-DOOR-JOUW-FORMSPREE-ID" method="POST">
+        <!-- Onderwerpregel van de notificatie-e-mail. Het ontvangend adres (info@keesisklaar.nl)
+             stel je in bij het aanmaken van dit formulier in je Formspree-account — zie README.md. -->
+        <input type="hidden" name="_subject" value="Nieuwe donatie-aanmelding — Just crowdfundingcampagne">
+
+        <h3 style="margin-bottom:16px;">1. Kies je bedrag</h3>
+        <div class="amount-grid" role="radiogroup" aria-label="Kies een donatiebedrag">
+          <label class="amount-option">
+            <input type="radio" name="bedrag" value="35">
+            €35<span>Debatbezoeker</span>
+          </label>
+          <label class="amount-option">
+            <input type="radio" name="bedrag" value="60">
+            €60<span>Founding Family</span>
+          </label>
+          <label class="amount-option">
+            <input type="radio" name="bedrag" value="750">
+            €750<span>Bedrijf</span>
+          </label>
+          <label class="amount-option">
+            <input type="radio" name="bedrag" value="1500">
+            €1.500<span>Debatpartner</span>
+          </label>
+          <label class="amount-option">
+            <input type="radio" name="bedrag" value="anders">
+            Ander bedrag
+          </label>
+        </div>
+        <input type="number" id="custom-bedrag" name="bedrag_anders" min="1" step="1" placeholder="Vul je bedrag in (€)" hidden
+               class="form-group" style="width:100%; padding:14px 16px; border:2px solid var(--color-light-grey); border-radius:var(--radius-s); margin-bottom:20px; font-family:var(--font-body); font-size:var(--fs-medium);">
+
+        <h3 style="margin:28px 0 16px;">2. Jouw gegevens</h3>
+        <div class="form-group">
+          <label for="naam">Naam *</label>
+          <input type="text" id="naam" name="naam" required autocomplete="name">
+        </div>
+        <div class="form-group">
+          <label for="email">E-mailadres *</label>
+          <input type="email" id="email" name="email" required autocomplete="email">
+        </div>
+
+        <div class="checkbox-row">
+          <input type="checkbox" id="wil-factuur" name="wil_factuur" value="ja">
+          <label for="wil-factuur">Ik wil een factuur ontvangen (vul dan ook bedrijfsnaam en btw-nummer in)</label>
+        </div>
+
+        <div class="invoice-fields" id="invoice-fields" hidden>
+          <div class="form-group">
+            <label for="bedrijfsnaam">Bedrijfsnaam</label>
+            <input type="text" id="bedrijfsnaam" name="bedrijfsnaam" autocomplete="organization">
+          </div>
+          <div class="form-group">
+            <label for="btw">BTW-nummer</label>
+            <input type="text" id="btw" name="btw_nummer" autocomplete="off">
+          </div>
+        </div>
+
+        <div class="checkbox-row">
+          <input type="checkbox" id="wil-marketing" name="wil_marketing_updates" value="ja">
+          <label for="wil-marketing">Ja, ik wil in de toekomst marketing-updates van Just ontvangen (nieuws, aanbiedingen). Je kunt je altijd afmelden.</label>
+        </div>
+
+        <div class="checkbox-row">
+          <input type="checkbox" id="akkoord-privacy" required>
+          <label for="akkoord-privacy">Ik ga akkoord met het <a href="/privacybeleid.html" target="_blank" rel="noopener">privacybeleid</a> van Just. *</label>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center; margin-top:8px;">
+          Gegevens doorgeven &mdash; <span id="selected-amount-label">–</span>
+        </button>
+        <p class="form-feedback" id="donate-feedback" role="status"></p>
+
+        <div class="payment-buttons" id="payment-buttons" hidden>
+          <a href="#" id="btn-mollie" class="btn btn-mollie" target="_blank" rel="noopener">Betaal via Mollie (iDEAL)</a>
+          <a href="#" id="btn-stripe" class="btn btn-stripe" target="_blank" rel="noopener">Betaal via Stripe (kaart)</a>
+          <a href="#" id="btn-tikkie" class="btn btn-tikkie" target="_blank" rel="noopener">Betaal via Tikkie</a>
+        </div>
+      </form>
+
+      <div class="bank-transfer-box">
+        <h4 style="margin-bottom:8px;">Liever rechtstreeks overmaken?</h4>
+        <p style="margin-bottom:4px;">Dat kan ook. Maak je bedrag over naar:</p>
+        <span class="iban">AI Life — NL20 ABNA 0141910909</span>
+        <p style="font-size:var(--fs-small); color:#6b6b70; margin-top:8px;">Vermeld je naam en het gekozen pakket als omschrijving, en vul daarnaast bovenstaand formulier in zodat we weten wie je bent en (indien gewenst) een factuur kunnen sturen.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ VEELGESTELDE VRAGEN OVER DE CAMPAGNE ============ -->
+  <section class="section">
+    <div class="container" style="max-width:720px;">
+      <span class="eyebrow">Vragen</span>
+      <h2>Veelgestelde vragen over doneren</h2>
+
+      <details class="faq-item">
+        <summary class="faq-question">Is mijn betaling veilig?</summary>
+        <div class="faq-answer"><p>Ja. Betalingen lopen via Mollie, Stripe of Tikkie (gekoppeld aan iDEAL/ABN AMRO). Just ziet en bewaart je kaart- of bankgegevens nooit zelf.</p></div>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-question">Krijg ik een factuur?</summary>
+        <div class="faq-answer"><p>Ja, als je dat aanvinkt in het formulier en je bedrijfsnaam + btw-nummer invult. We sturen de factuur na je donatie per e-mail toe.</p></div>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-question">Wat gebeurt er met mijn gegevens?</summary>
+        <div class="faq-answer"><p>We gebruiken je naam en e-mailadres om je donatie te verwerken en (indien van toepassing) een factuur te sturen. Alleen als je dat expliciet aanvinkt, ontvang je ook marketing-updates. Zie ons <a href="/privacybeleid.html">privacybeleid</a> voor de volledige uitleg.</p></div>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-question">Is mijn donatie fiscaal aftrekbaar?</summary>
+        <div class="faq-answer"><p>Dat hangt af van de status van de ontvangende entiteit (AI Life) op het moment van doneren. Neem voor zekerheid contact op via <a href="/contact.html">onze contactpagina</a> voordat je doneert.</p></div>
+      </details>
+    </div>
+  </section>
+
+  <!-- ============ SLOT-CTA ============ -->
+  <section class="section bg-blue text-center">
+    <div class="container">
+      <h2>Doe mee vóór 2 november</h2>
+      <p class="lead mx-auto" style="color:#fff; opacity:0.9;">Elke bijdrage brengt het debat over mentale last dichterbij.</p>
+      <a href="#doneer" class="btn btn-yellow" style="margin-top:16px;">Doneer nu</a>
+    </div>
+  </section>
+
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <img src="/assets/img/logo/justfamily-logo.png" alt="Just family" style="height:40px; margin-bottom:16px;">
+        <p style="max-width:38ch; opacity:0.8;">Just is de AI-assistent die het huishouden en de mentale last eerlijk verdeelt tussen jou, je partner en je gezin — zodat er weer tijd overblijft voor elkaar.</p>
+        <div class="social-links">
+      <a href="https://www.instagram.com/just_family_ai/" target="_blank" rel="noopener noreferrer" aria-label="Just op Instagram"><span class="social-icon" style="--icon:url(/assets/img/icons/social/instagram.svg);"></span></a>
+      <a href="https://www.facebook.com/profile.php?id=61588828659085" target="_blank" rel="noopener noreferrer" aria-label="Just op Facebook"><span class="social-icon" style="--icon:url(/assets/img/icons/social/facebook.svg);"></span></a>
+      <a href="https://elienvanriet.substack.com/" target="_blank" rel="noopener noreferrer" aria-label="Just op Substack"><span class="social-icon" style="--icon:url(/assets/img/icons/social/substack.svg);"></span></a>
+      <a href="https://wa.me/31612673437" target="_blank" rel="noopener noreferrer" aria-label="Just op WhatsApp"><span class="social-icon" style="--icon:url(/assets/img/icons/social/whatsapp.svg);"></span></a>
+      </div>
+
+      </div>
+      <div>
+        <h4>Just</h4>
+        <ul>
+          <li><a href="/over-just.html">Over Just</a></li>
+          <li><a href="/index.html#experts">Experts</a></li>
+          <li><a href="/campagne.html">Crowdfunding</a></li>
+          <li><a href="/faq.html">FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="/contact.html">Contactpagina</a></li>
+          <li><a href="mailto:info@justfamily.nl">info@justfamily.nl</a></li>
+          <li><a href="tel:+31612673437">+31 6 12673437</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Juridisch</h4>
+        <ul>
+          <li><a href="/privacybeleid.html">Privacybeleid</a></li>
+          <li><a href="/cookiebeleid.html">Cookiebeleid</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; <span id="year">2026</span> Just — een initiatief van AI Life. Alle rechten voorbehouden.</span>
+      <span>Gemaakt in Nederland &middot; Data in de EU</span>
+    </div>
+  </div>
+</footer>
+
+<div class="cookie-banner" id="cookie-banner" hidden role="dialog" aria-label="Cookiemelding">
+  <p>We gebruiken alleen functionele cookies om de site goed te laten werken. Lees ons <a href="/cookiebeleid.html">cookiebeleid</a>.</p>
+  <div class="cookie-actions">
+    <button id="cookie-decline" class="btn btn-outline" style="border-color:#fff;">Weigeren</button>
+    <button id="cookie-accept" class="btn btn-yellow">Akkoord</button>
+  </div>
+</div>
+
+<script src="/assets/js/main.js"></script>
+<script src="/assets/js/crowdfunding.js"></script>
+</body>
+</html>
