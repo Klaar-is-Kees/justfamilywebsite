@@ -1,32 +1,104 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://justfamily.nl/index.html</loc>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://justfamily.nl/index.html"/>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://justfamily.nl/en/index.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://justfamily.nl/index.html"/>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://justfamily.nl/en/index.html</loc>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://justfamily.nl/index.html"/>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://justfamily.nl/en/index.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://justfamily.nl/index.html"/>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://justfamily.nl/over-just.html</loc>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://justfamily.nl/over-just.html"/>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://justfamily.nl/en/about.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://justfamily.nl/over-just.html"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://justfamily.nl/en/about.html</loc>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://justfamily.nl/over-just.html"/>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://justfamily.nl/en/about.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://justfamily.nl/over-just.html"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://justfamily.nl/faq.html</loc>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://justfamily.nl/faq.html"/>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://justfamily.nl/en/faq.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://justfamily.nl/faq.html"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://justfamily.nl/en/faq.html</loc>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://justfamily.nl/faq.html"/>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://justfamily.nl/en/faq.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://justfamily.nl/faq.html"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://justfamily.nl/contact.html</loc>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://justfamily.nl/contact.html"/>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://justfamily.nl/en/contact.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://justfamily.nl/contact.html"/>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://justfamily.nl/en/contact.html</loc>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://justfamily.nl/contact.html"/>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://justfamily.nl/en/contact.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://justfamily.nl/contact.html"/>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://justfamily.nl/privacybeleid.html</loc>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://justfamily.nl/privacybeleid.html"/>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://justfamily.nl/en/privacy-policy.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://justfamily.nl/privacybeleid.html"/>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
+    <loc>https://justfamily.nl/en/privacy-policy.html</loc>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://justfamily.nl/privacybeleid.html"/>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://justfamily.nl/en/privacy-policy.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://justfamily.nl/privacybeleid.html"/>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://justfamily.nl/campagne.html</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>https://justfamily.nl/cookiebeleid.html</loc>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://justfamily.nl/cookiebeleid.html"/>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://justfamily.nl/en/cookie-policy.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://justfamily.nl/cookiebeleid.html"/>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://justfamily.nl/en/cookie-policy.html</loc>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://justfamily.nl/cookiebeleid.html"/>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://justfamily.nl/en/cookie-policy.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://justfamily.nl/cookiebeleid.html"/>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
