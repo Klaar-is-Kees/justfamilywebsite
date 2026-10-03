@@ -17,6 +17,9 @@ justfamily/
 ├── sitemap.xml
 ├── site.webmanifest
 ├── CNAME                   → bevat "justfamily.nl" (voor custom domain op GitHub Pages)
+├── i18n/                   → Engelse versie: build-script, vertaalgeheugen (en.json), config — zie i18n/README.md
+├── en/                     → AUTOMATISCH gegenereerde Engelse site (niet aanpassen, staat in .gitignore)
+├── .github/workflows/      → GitHub Action: bouwt /en/ en zet de site live
 └── assets/
     ├── css/style.css       → Kleuren & typografie 1-op-1 uit jullie theme.json
     ├── js/main.js          → Lottie-loader, mobiel menu, FAQ-accordion
@@ -28,12 +31,17 @@ justfamily/
     │   └── badges/         → Officiële App Store / Google Play badges
 ```
 
+## Engelse versie
+
+De Engelse site (`justfamily.nl/en/`) wordt **automatisch** gemaakt uit de Nederlandse pagina's. Je past dus alleen de Nederlandse pagina's aan. Zie [`i18n/README.md`](i18n/README.md).
+
 ## Site live zetten via GitHub Pages
 
 1. Maak een nieuwe (lege) GitHub-repository, bijv. `justfamily-website`.
 2. Zet alle bestanden uit deze map in de root van die repository en commit/push ze.
 3. Ga naar **Settings → Pages** in de repository.
-4. Kies bij "Build and deployment" → Source: **Deploy from a branch**, branch `main`, map `/ (root)`.
+4. Kies bij "Build and deployment" → Source: **GitHub Actions**. De workflow in `.github/workflows/build-and-deploy.yml` bouwt bij elke push de Engelse versie en zet alles live.
+   Voeg ook het secret `DEEPL_API_KEY` toe (zie `i18n/README.md`).
 5. Zet bij **Custom domain** `justfamily.nl` in (het CNAME-bestand staat al klaar) en wacht tot DNS/HTTPS geverifieerd zijn.
 6. Zorg dat bij je domeinregistrar (waar justfamily.nl geregistreerd is) de DNS A-records naar GitHub Pages wijzen:
    ```
