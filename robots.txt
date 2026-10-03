@@ -31,3 +31,4 @@ User-agent: Bytespider
 Allow: /
 
 Sitemap: https://justfamily.nl/sitemap.xml
+Sitemap: https://justfamily.nl/en/sitemap.xml
