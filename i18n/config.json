@@ -1,0 +1,19 @@
+{
+  "base_url": "https://justfamily.nl",
+  "output_dir": "en",
+  "deepl_target_lang": "EN-GB",
+  "deepl_glossary_id": "",
+  "og_locale": "en_GB",
+  "pages": {
+    "index.html": "index.html",
+    "over-just.html": "about.html",
+    "faq.html": "faq.html",
+    "contact.html": "contact.html",
+    "privacybeleid.html": "privacy-policy.html",
+    "cookiebeleid.html": "cookie-policy.html"
+  },
+  "extra_files": {
+    "llms.txt": "llms.txt"
+  },
+  "replacements": []
+}
