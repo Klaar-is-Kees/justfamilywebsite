@@ -2,6 +2,23 @@
 // Laadt Lottie-animaties lui in (alleen als lottie-web geladen is en het element in beeld komt)
 
 document.addEventListener('DOMContentLoaded', function () {
+  // Taal van de pagina (NL is standaard; /en/-pagina's hebben lang="en-US")
+  var IS_EN = (document.documentElement.lang || '').toLowerCase().indexOf('en') === 0;
+  var T = {
+    formError: IS_EN
+      ? 'Please fill in your name, a valid email address and your message.'
+      : 'Vul je naam, een geldig e-mailadres en je bericht in.',
+    formSuccess: IS_EN
+      ? 'Your mail app will open with your message ready to send to info@justfamily.nl.'
+      : 'Je mailprogramma opent met je bericht klaar om te versturen naar info@justfamily.nl.',
+    carouselSlide: IS_EN ? 'Go to slide ' : 'Ga naar kaart ',
+    waitlistInvalid: IS_EN ? 'Please enter a valid email address.' : 'Vul een geldig e-mailadres in.',
+    waitlistConsent: IS_EN ? 'Please accept the privacy policy to continue.' : 'Ga akkoord met het privacybeleid om door te gaan.',
+    waitlistInactive: IS_EN ? 'Sign-up is not active yet. Please try again later.' : 'Aanmelden is nog niet actief. Probeer het later opnieuw.',
+    waitlistSuccess: IS_EN ? 'Thank you! We will let you know as soon as the AI Agent is available.' : 'Bedankt! We laten het je weten zodra de AI-Agent beschikbaar is.',
+    waitlistError: IS_EN ? 'Something went wrong. Please try again.' : 'Er ging iets mis. Probeer het opnieuw.'
+  };
+
   // Kleine helper, op meerdere plekken in dit bestand gebruikt
   function debounce(fn, wait) {
     var t;
@@ -174,7 +191,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
       if (!naam || !emailOk || !bericht) {
         if (feedback) {
-          feedback.textContent = 'Vul je naam, een geldig e-mailadres en je bericht in.';
+          feedback.textContent = T.formError;
           feedback.className = 'form-feedback form-feedback--error';
         }
         return;
@@ -185,7 +202,7 @@ document.addEventListener('DOMContentLoaded', function () {
       window.location.href = 'mailto:info@justfamily.nl?subject=' + subject + '&body=' + body;
 
       if (feedback) {
-        feedback.textContent = 'Je mailprogramma opent met je bericht klaar om te versturen naar info@justfamily.nl.';
+        feedback.textContent = T.formSuccess;
         feedback.className = 'form-feedback form-feedback--success';
       }
     });
@@ -207,6 +224,14 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     if (acceptBtn) acceptBtn.addEventListener('click', function () { setConsent('accepted'); });
     if (declineBtn) declineBtn.addEventListener('click', function () { setConsent('declined'); });
+
+    // Knoppen "Cookie-instellingen" (bv. op de cookiebeleid-pagina): wis de keuze en toon de banner opnieuw
+    document.querySelectorAll('[data-cookie-settings]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        try { localStorage.removeItem('justfamily-cookie-consent'); } catch (e) {}
+        cookieBanner.hidden = false;
+      });
+    });
   }
 
   // --- Carousel (bv. experts-sectie): automatisch doorschuiven + pijlen ---
@@ -229,7 +254,7 @@ document.addEventListener('DOMContentLoaded', function () {
       items.forEach(function (item, i) {
         var dot = document.createElement('button');
         dot.type = 'button';
-        dot.setAttribute('aria-label', 'Ga naar kaart ' + (i + 1));
+        dot.setAttribute('aria-label', T.carouselSlide + (i + 1));
         dot.addEventListener('click', function () { goTo(i); restartAutoplay(); });
         dotsWrap.appendChild(dot);
         dots.push(dot);
@@ -293,6 +318,42 @@ document.addEventListener('DOMContentLoaded', function () {
     // Pauzeer autoplay als het tabblad niet actief is (bespaart resources/batterij)
     document.addEventListener('visibilitychange', function () {
       if (document.hidden) stopAutoplay(); else startAutoplay();
+    });
+  });
+
+  // --- AI-Agent aanmeldformulier (e-mailadres achterlaten) ---
+  document.querySelectorAll('[data-waitlist-form]').forEach(function (form) {
+    var feedback = form.querySelector('[data-waitlist-feedback]');
+    var emailInput = form.querySelector('input[type="email"]');
+    var consent = form.querySelector('input[type="checkbox"]');
+    var button = form.querySelector('button[type="submit"]');
+
+    function say(msg, type) {
+      feedback.textContent = msg;
+      feedback.className = 'form-feedback form-feedback--' + type;
+    }
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var email = emailInput.value.trim();
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { say(T.waitlistInvalid, 'error'); emailInput.focus(); return; }
+      if (!consent.checked) { say(T.waitlistConsent, 'error'); return; }
+      // Zolang het formulier-endpoint nog de placeholder is, NIET doen alsof het gelukt is.
+      if (form.getAttribute('action').indexOf('VERVANG') !== -1) { say(T.waitlistInactive, 'error'); return; }
+
+      button.disabled = true;
+      fetch(form.getAttribute('action'), {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      })
+        .then(function (res) {
+          if (!res.ok) throw new Error('bad status');
+          form.reset();
+          say(T.waitlistSuccess, 'success');
+        })
+        .catch(function () { say(T.waitlistError, 'error'); })
+        .then(function () { button.disabled = false; });
     });
   });
 
