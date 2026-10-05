@@ -525,3 +525,4 @@ img.expert-avatar { border: 3px solid var(--color-off-white); }
 .skip-link:focus { left: 12px; top: 12px; }
 
 :focus-visible { outline: 3px solid var(--color-primary-blue); outline-offset: 2px; }
+.cookie-banner[hidden] { display: none; }
