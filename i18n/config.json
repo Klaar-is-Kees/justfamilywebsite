@@ -16,4 +16,5 @@
     "llms.txt": "llms.txt"
   },
   "replacements": []
+  "exclude": ["campagne.html"]
 }
