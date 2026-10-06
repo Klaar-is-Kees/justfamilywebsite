@@ -334,7 +334,7 @@ def build_sitemap():
 # --------------------------------------------------------------------------- #
 def main():
     os.chdir(ROOT)
-       exclude = set(CONFIG.get("exclude", []))
+    exclude = set(CONFIG.get("exclude", []))
     nl_files = sorted(p.name for p in ROOT.glob("*.html") if p.name not in exclude)
     for f in nl_files:
         if f not in PAGES:
