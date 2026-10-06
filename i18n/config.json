@@ -15,6 +15,6 @@
   "extra_files": {
     "llms.txt": "llms.txt"
   },
-  "replacements": []
+  "replacements": [],
   "exclude": ["campagne.html"]
 }
