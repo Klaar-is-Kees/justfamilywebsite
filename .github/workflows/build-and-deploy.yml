@@ -51,7 +51,8 @@ jobs:
         run: |
           mkdir _site
           rsync -a --exclude '.git' --exclude '.github' --exclude '_site' \
-                   --exclude 'i18n' --exclude 'README.md' --exclude '.gitignore' ./ _site/
+                   --exclude 'i18n' --exclude 'README.md' --exclude '.gitignore' \
+                   --exclude 'campagne.html' ./ _site/
 
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
