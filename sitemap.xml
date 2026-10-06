@@ -81,11 +81,11 @@
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
-  <url>
+  <!--<url>
     <loc>https://justfamily.nl/campagne.html</loc>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
-  </url>
+  </url>-->
   <url>
     <loc>https://justfamily.nl/cookiebeleid.html</loc>
     <xhtml:link rel="alternate" hreflang="nl" href="https://justfamily.nl/cookiebeleid.html"/>
