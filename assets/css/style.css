@@ -242,9 +242,10 @@ ul { padding-left: 1.2em; }
 
 /* ---------- Experts / advisors ---------- */
 .expert-grid {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);   /* ← wordt dit */
   gap: 28px;
-  margin-top: 0;
+  margin-top: 40px;
 }
 .expert-grid .expert-card {
   flex: 0 0 calc(25% - 21px);
