@@ -135,10 +135,10 @@ document.addEventListener('DOMContentLoaded', function () {
     mollie: {
       35:   'https://payment-links.mollie.com/payment/2UuBnejGFMVpEEhWvWbxN',
       60:   'https://payment-links.mollie.com/payment/DWEHBU3W92RcYgRcdie7c',
-      750:  'hhttps://payment-links.mollie.com/payment/N977RDaLq8JYZmSpVU37z',
+      750:  'https://payment-links.mollie.com/payment/N977RDaLq8JYZmSpVU37z',
       1500: 'https://payment-links.mollie.com/payment/WayxptDyqChtdfAMPWHxi'
-    },
-    stripe: {
+    }
+    /*stripe: {
       35:   'https://buy.stripe.com/VERVANG-STRIPE-LINK-35',
       60:   'https://buy.stripe.com/VERVANG-STRIPE-LINK-60',
       750:  'https://buy.stripe.com/VERVANG-STRIPE-LINK-750',
@@ -152,14 +152,14 @@ document.addEventListener('DOMContentLoaded', function () {
       60:   'https://tikkie.me/pl/VERVANG-TIKKIE-LINK-60',
       750:  'https://tikkie.me/pl/VERVANG-TIKKIE-LINK-750',
       1500: 'https://tikkie.me/pl/VERVANG-TIKKIE-LINK-1500',
-      ander: 'https://payment-links.mollie.com/payment/jvgJDA4js82dWE2rhtZZ6'
-    }
+      
+    }*/
   };
   // Generieke links voor een vrij ("anders") bedrag -- vul in als je provider dit ondersteunt
   // (bij Mollie/Stripe kan dit via een eigen "pay what you want"-paylink of Payment Element;
   // bij Tikkie kun je in de app een verzoek "zonder vast bedrag" aanmaken).
   var GENERIC_LINKS = {
-    mollie: 'https://www.mollie.com/payments/VERVANG-MOLLIE-LINK-VRIJ-BEDRAG'
+    mollie: 'https://payment-links.mollie.com/payment/jvgJDA4js82dWE2rhtZZ6'
     /* stripe: 'https://buy.stripe.com/VERVANG-STRIPE-LINK-VRIJ-BEDRAG',
     tikkie: 'https://tikkie.me/pl/VERVANG-TIKKIE-LINK-VRIJ-BEDRAG'*/
   };
@@ -210,22 +210,55 @@ document.addEventListener('DOMContentLoaded', function () {
         return;
       }
 
-      // Formulier is geldig: laat 'm doorgaan naar het formulier-endpoint (indien ingesteld),
-      // en toon de betaalknoppen zodat de donateur direct door kan naar Mollie/Stripe.
-      var paymentButtons = document.getElementById('payment-buttons');
-      if (paymentButtons) paymentButtons.hidden = false;
-      updatePaymentButtons();
+      // Formulier is geldig: niet de normale formulierverzending gebruiken (die zou de bezoeker
+      // naar een Formspree-pagina sturen), maar de gegevens op de achtergrond versturen en
+      // daarna direct doorsturen naar de Mollie-betaalpagina voor het gekozen bedrag.
+      e.preventDefault();
 
+      var mollieUrl = PAYMENT_LINKS.mollie[amount] || GENERIC_LINKS.mollie;
+      var hasMollieLink = mollieUrl && mollieUrl.indexOf('VERVANG') === -1;
+
+      // Geen werkende Mollie-link voor dit bedrag (bv. "Ander bedrag" zonder vrij-bedraglink):
+      // niet doorsturen naar een kapotte pagina, maar naar de bankoverschrijving verwijzen.
+      if (!hasMollieLink) {
+        sendDonorData(donateForm);
+        if (feedback) {
+          feedback.textContent = 'Bedankt! Voor dit bedrag is nog geen online betaallink beschikbaar. Maak je bijdrage over via de bankgegevens hieronder.';
+          feedback.className = 'form-feedback form-feedback--success';
+        }
+        return;
+      }
+
+      var submitBtn = donateForm.querySelector('button[type="submit"]');
+      if (submitBtn) submitBtn.disabled = true;
       if (feedback) {
-        feedback.textContent = 'Bedankt! Rond je donatie af via Mollie hieronder, of maak zelf over via de bankgegevens.';
+        feedback.textContent = 'Bedankt! Je wordt doorgestuurd naar Mollie om je donatie af te ronden…';
         feedback.className = 'form-feedback form-feedback--success';
       }
 
-      // Als het formulier-endpoint nog de placeholder is, niet echt versturen (voorkomt een 404/foutmelding).
-      if (donateForm.action.indexOf('VERVANG') !== -1) {
-        e.preventDefault();
+      // Altijd doorsturen, ook als het versturen van de gegevens mislukt of te lang duurt (max. 3 sec).
+      var redirected = false;
+      function goToMollie() {
+        if (redirected) return;
+        redirected = true;
+        window.location.href = mollieUrl;
       }
+      setTimeout(goToMollie, 3000);
+      sendDonorData(donateForm).then(goToMollie, goToMollie);
     });
+  }
+
+  // Verstuurt de formuliergegevens op de achtergrond naar het formulier-endpoint (Formspree).
+  // Staat het endpoint nog op de placeholder, dan wordt er niets verstuurd.
+  function sendDonorData(form) {
+    if (!form.action || form.action.indexOf('VERVANG') !== -1) {
+      return Promise.resolve();
+    }
+    return fetch(form.action, {
+      method: 'POST',
+      body: new FormData(form),
+      headers: { 'Accept': 'application/json' }
+    }).catch(function () { /* stil negeren: de betaling gaat voor */ });
   }
 
   // --- Jaartal in footer (zelfde als main.js, voor het geval deze pagina main.js niet laadt) ---
