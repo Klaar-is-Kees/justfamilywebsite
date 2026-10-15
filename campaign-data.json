@@ -1,6 +1,6 @@
 {
   "_instructies": "Dit bestand voedt de voortgangsteller op /campagne.html. Werk 'raised', 'donors' en 'updated' bij nadat je de werkelijke stand in je Mollie- en/of Stripe-dashboard hebt gecontroleerd, en commit dit bestand naar GitHub. Zie README.md voor uitleg en opties om dit te automatiseren.",
-  "goal": 25000,
+  "goal": 10000,
   "raised": 0,
   "donors": 0,
   "currency": "EUR",
