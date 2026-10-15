@@ -151,16 +151,17 @@ document.addEventListener('DOMContentLoaded', function () {
       35:   'https://tikkie.me/pl/VERVANG-TIKKIE-LINK-35',
       60:   'https://tikkie.me/pl/VERVANG-TIKKIE-LINK-60',
       750:  'https://tikkie.me/pl/VERVANG-TIKKIE-LINK-750',
-      1500: 'https://tikkie.me/pl/VERVANG-TIKKIE-LINK-1500'
+      1500: 'https://tikkie.me/pl/VERVANG-TIKKIE-LINK-1500',
+      ander: 'https://payment-links.mollie.com/payment/jvgJDA4js82dWE2rhtZZ6'
     }
   };
   // Generieke links voor een vrij ("anders") bedrag -- vul in als je provider dit ondersteunt
   // (bij Mollie/Stripe kan dit via een eigen "pay what you want"-paylink of Payment Element;
   // bij Tikkie kun je in de app een verzoek "zonder vast bedrag" aanmaken).
   var GENERIC_LINKS = {
-    mollie: 'https://www.mollie.com/payments/VERVANG-MOLLIE-LINK-VRIJ-BEDRAG',
-    stripe: 'https://buy.stripe.com/VERVANG-STRIPE-LINK-VRIJ-BEDRAG',
-    tikkie: 'https://tikkie.me/pl/VERVANG-TIKKIE-LINK-VRIJ-BEDRAG'
+    mollie: 'https://www.mollie.com/payments/VERVANG-MOLLIE-LINK-VRIJ-BEDRAG'
+    /* stripe: 'https://buy.stripe.com/VERVANG-STRIPE-LINK-VRIJ-BEDRAG',
+    tikkie: 'https://tikkie.me/pl/VERVANG-TIKKIE-LINK-VRIJ-BEDRAG'*/
   };
 
   function updatePaymentButtons() {
@@ -169,14 +170,14 @@ document.addEventListener('DOMContentLoaded', function () {
       selectedAmountLabel.textContent = amount > 0 ? ('€' + amount) : '–';
     }
     var mollieBtn = document.getElementById('btn-mollie');
-    var stripeBtn = document.getElementById('btn-stripe');
-    var tikkieBtn = document.getElementById('btn-tikkie');
+   /* var stripeBtn = document.getElementById('btn-stripe');
+    var tikkieBtn = document.getElementById('btn-tikkie');*/
     var exactLink = PAYMENT_LINKS.mollie[amount];
     if (mollieBtn) mollieBtn.href = exactLink || GENERIC_LINKS.mollie;
-    var exactStripe = PAYMENT_LINKS.stripe[amount];
+   /* var exactStripe = PAYMENT_LINKS.stripe[amount];
     if (stripeBtn) stripeBtn.href = exactStripe || GENERIC_LINKS.stripe;
     var exactTikkie = PAYMENT_LINKS.tikkie[amount];
-    if (tikkieBtn) tikkieBtn.href = exactTikkie || GENERIC_LINKS.tikkie;
+    if (tikkieBtn) tikkieBtn.href = exactTikkie || GENERIC_LINKS.tikkie;*/
   }
   updatePaymentButtons();
 
@@ -216,7 +217,7 @@ document.addEventListener('DOMContentLoaded', function () {
       updatePaymentButtons();
 
       if (feedback) {
-        feedback.textContent = 'Bedankt! Rond je donatie af via Mollie of Stripe hieronder, of maak zelf over via de bankgegevens.';
+        feedback.textContent = 'Bedankt! Rond je donatie af via Mollie hieronder, of maak zelf over via de bankgegevens.';
         feedback.className = 'form-feedback form-feedback--success';
       }
 
