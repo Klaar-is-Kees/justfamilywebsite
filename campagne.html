@@ -32,6 +32,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="/assets/css/style.css">
+<link rel="stylesheet" href="/assets/css/campagne.css">
 
 <script type="application/ld+json">
 {
@@ -72,44 +73,127 @@
 
 <main id="main">
 
-  <!-- ============ HERO + COUNTDOWN + TELLER ============ -->
-  <section class="hero bg-blue" style="padding-bottom:64px;">
-    <div class="container" style="grid-template-columns:1fr; text-align:center;">
+  <!-- ============ HERO + COUNTDOWN + TALLY COUNTER ============ -->
+  <section class="hero bg-blue campaign-hero">
+    <div class="container">
       <div>
         <span class="hero-eyebrow">Crowdfundingcampagne</span>
         <h1>Help Just om de AI-Agent live te zetten!</h1>
-        <p class="lead mx-auto" style="color:#fff; opacity:0.92;">We organiseren een publiek debat over de ongelijke verdeling van mentale last thuis en bouwen verder aan de AI-Agent die gezinnen daarbij helpt. <span>Met jouw steun maken we dat mogelijk.</span></p>
+        <p class="lead">We organiseren een publiek debat over de ongelijke verdeling van mentale last thuis en bouwen verder aan de AI-Agent die gezinnen daarbij helpt. <span>Met jouw steun maken we dat mogelijk.</span></p>
 
         <div id="countdown-closed-wrap">
-          <div id="campaign-closed-banner" class="hero-eyebrow" style="background:#fff; color:var(--color-soft-black); display:block; margin:20px auto 0; max-width:420px;" hidden>
+          <div id="campaign-closed-banner" class="hero-eyebrow" hidden>
             De campagne is gesloten. Bedankt aan iedereen die heeft bijgedragen! Vragen? <a href="/contact.html">Neem contact op</a>.
           </div>
         </div>
 
-        <div class="countdown" id="countdown" data-deadline="2026-11-02T23:59:59+01:00">
+        <div class="countdown" id="countdown" data-deadline="2026-11-02T23:59:59+01:00" aria-label="Tijd tot het einde van de campagne">
           <div class="countdown-unit"><span class="num" id="cd-days">–</span><span class="label">dagen</span></div>
           <div class="countdown-unit"><span class="num" id="cd-hours">–</span><span class="label">uur</span></div>
           <div class="countdown-unit"><span class="num" id="cd-minutes">–</span><span class="label">min</span></div>
           <div class="countdown-unit"><span class="num" id="cd-seconds">–</span><span class="label">sec</span></div>
         </div>
-        <p style="color:#fff; opacity:0.75; font-size:var(--fs-small); margin-top:-10px;">Campagne loopt tot en met 2 november</p>
+        <p class="countdown-note">Campagne loopt tot en met 2 november</p>
 
-        <div id="campaign-progress" class="campaign-progress" style="margin-top:32px;">
-          <span class="campaign-live-dot"></span><span style="font-size:var(--fs-small); color:#6b6b70; font-weight:700;">LIVE</span>
-          <div style="margin-top:8px;">
-            <span class="raised" id="amount-raised">€0</span>
-            <span class="goal"> van <span id="amount-goal">€10.000</span> doel</span>
+        <div class="badge-row" style="margin-top:28px;">
+          <a href="#doneer" class="btn btn-yellow">Doneer nu</a>
+          <a href="#pakketten" class="btn btn-outline">Bekijk de pakketten</a>
+        </div>
+      </div>
+
+      <!-- Tally counter: toont het opgehaalde bedrag uit campaign-data.json -->
+      <div id="campaign-progress">
+        <div class="tally" id="tally">
+          <span class="tally-ring" aria-hidden="true"></span>
+          <a class="tally-button" id="tally-button" href="#pakketten" aria-label="Tel mee: kies een pakket">
+            <span class="tally-cap"><span class="tally-heart"></span></span>
+          </a>
+          <div class="tally-body">
+            <span class="tally-reset" aria-hidden="true"></span>
+            <div class="tally-face">
+              <div class="tally-brand" translate="no">Just <small>family</small></div>
+              <div class="tally-window" id="tally-window" role="img" aria-label="€0 opgehaald">
+                <span class="tally-cur" aria-hidden="true">€</span>
+                <span class="tally-digits" id="tally-digits" aria-hidden="true">
+                  <span class="tally-digit"><span class="tally-strip"><span><b>0</b></span></span></span>
+                  <span class="tally-digit"><span class="tally-strip"><span><b>0</b></span></span></span>
+                  <span class="tally-digit"><span class="tally-strip"><span><b>0</b></span></span></span>
+                  <span class="tally-digit"><span class="tally-strip"><span><b>0</b></span></span></span>
+                  <span class="tally-digit"><span class="tally-strip"><span><b>0</b></span></span></span>
+                </span>
+              </div>
+              <div class="tally-label"><span class="live-dot" aria-hidden="true"></span> Live opgehaald</div>
+              <div class="tally-sub">van <span class="js-goal">€10.000</span> doel</div>
+            </div>
           </div>
-          <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
-          <div class="campaign-stats">
-            <!--- <span><strong id="donor-count">0</strong> donateurs</span> --->
-            <span>Laatst bijgewerkt: <span id="last-updated">zojuist</span></span>
+        </div>
+        <p class="tally-hint">Druk op de knop en tel mee &darr;</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DASHBOARD: STAND VAN HET DOEL ============ -->
+  <section class="section bg-off" id="doel">
+    <div class="container">
+      <span class="eyebrow">Stand van zaken</span>
+      <h2>Zo staan we ervoor</h2>
+      <p class="lead">Samen werken we naar <span class="js-goal">€10.000</span> toe. Hier zie je hoe ver we zijn en wat er nog nodig is.</p>
+
+      <div class="dash">
+        <div class="dash-card dash-gauge">
+          <div class="gauge" id="gauge" role="img" aria-label="0% van het doel bereikt">
+            <svg viewBox="0 0 120 120" aria-hidden="true">
+              <circle class="gauge-track" cx="60" cy="60" r="52" fill="none" stroke-width="12"/>
+              <circle class="gauge-fill" id="gauge-fill" cx="60" cy="60" r="52" fill="none" stroke-width="12"
+                      stroke-dasharray="326.73" stroke-dashoffset="326.73"/>
+            </svg>
+            <div class="gauge-center" aria-hidden="true">
+              <span class="gauge-pct" id="gauge-pct">0%</span>
+              <span class="gauge-cap">van het doel</span>
+            </div>
+          </div>
+          <p class="dash-note">Elke bijdrage telt direct mee.</p>
+        </div>
+
+        <div class="dash-tiles">
+          <div class="tile">
+            <div class="tile-head"><span class="tile-icon" style="background:rgba(85,120,246,0.14); color:var(--color-primary-blue);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20.5 10.6 19.2C5.7 14.8 2.5 11.9 2.5 8.4 2.5 5.6 4.7 3.5 7.4 3.5c1.6 0 3.1.7 4.1 1.9 1-1.2 2.5-1.9 4.1-1.9 2.8 0 4.9 2.1 4.9 4.9 0 3.5-3.2 6.4-8.1 10.8z"/></svg></span>Opgehaald</div>
+            <div class="tile-value" id="amount-raised">€0</div>
+            <div class="tile-sub">tot nu toe</div>
+          </div>
+          <div class="tile">
+            <div class="tile-head"><span class="tile-icon" style="background:rgba(249,210,45,0.3); color:#8a6d00;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/></svg></span>Doel</div>
+            <div class="tile-value" id="amount-goal">€10.000</div>
+            <div class="tile-sub">voor debat &amp; AI-Agent</div>
+          </div>
+          <div class="tile">
+            <div class="tile-head"><span class="tile-icon" style="background:rgba(235,145,183,0.25); color:#b3416f;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 18 10 12l4 4 6-8"/><path d="M15 8h5v5"/></svg></span>Nog te gaan</div>
+            <div class="tile-value" id="amount-left">€10.000</div>
+            <div class="tile-sub">tot het doel</div>
+          </div>
+          <div class="tile">
+            <div class="tile-head"><span class="tile-icon" style="background:rgba(9,85,80,0.12); color:var(--color-teal);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2.5"/><path d="M9 2.5h6"/></svg></span>Dagen te gaan</div>
+            <div class="tile-value" id="days-left">–</div>
+            <div class="tile-sub">t/m 2 november</div>
           </div>
         </div>
 
-        <div class="badge-row" style="margin-top:28px; justify-content:center;">
-          <a href="#doneer" class="btn btn-yellow">Doneer nu</a>
-          <a href="#pakketten" class="btn btn-outline" style="color:#fff;">Bekijk de pakketten</a>
+        <div class="dash-card dash-progress">
+          <div class="dash-progress-head">
+            <h3>Mijlpalen</h3>
+            <span class="dash-updated"><span class="live-dot" aria-hidden="true"></span> Laatst bijgewerkt: <span id="last-updated">zojuist</span></span>
+          </div>
+          <div class="mbar">
+            <div class="mbar-track"><div class="mbar-fill" id="progress-fill"></div></div>
+            <ol class="mbar-marks" id="milestones">
+              <li class="mbar-mark" data-pct="25" style="left:25%"><span class="mbar-dot"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span class="mbar-label"><strong class="js-ms">€2.500</strong><span>25%</span></span></li>
+              <li class="mbar-mark" data-pct="50" style="left:50%"><span class="mbar-dot"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span class="mbar-label"><strong class="js-ms">€5.000</strong><span>halverwege</span></span></li>
+              <li class="mbar-mark" data-pct="75" style="left:75%"><span class="mbar-dot"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span class="mbar-label"><strong class="js-ms">€7.500</strong><span>75%</span></span></li>
+              <li class="mbar-mark" data-pct="100" style="left:100%"><span class="mbar-dot"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span class="mbar-label"><strong class="js-ms">€10.000</strong><span>doel!</span></span></li>
+            </ol>
+          </div>
+          <p class="dash-nudge" id="dash-nudge">Nog <strong class="js-left">€10.000</strong> te gaan &mdash; dat zijn bijvoorbeeld <strong id="nudge-count">167</strong> Just Familie-pakketten.</p>
+          <!-- <span><strong id="donor-count">0</strong> donateurs</span> -->
         </div>
       </div>
     </div>
@@ -123,37 +207,113 @@
       <p class="lead">Elk bedrag helpt. Vanaf €35,- ben je erbij, en hoe hoger de bijdrage, hoe meer zichtbaarheid en toegang je krijgt.</p>
 
       <div class="tier-grid">
-        <div class="tier-card">
-          <div class="tier-amount">€35,-</div>
-          <div class="tier-name" > <b>Just VIP</b> </div>
-          <p class="tier-desc">VIP-plek bij het debat + vroege toegang tot de AI-Agent.</p>
-          <button class="btn btn-primary" data-select-tier="35">Kies dit pakket</button>
-           <br></br>
+        <article class="tier-card tier-card--vip">
+          <div class="tier-top">
+            <span class="tier-kind">Particulier</span>
+            <h3 class="tier-name">Just VIP</h3>
+            <div class="tier-amount">€35,-</div>
+          </div>
+          <div class="tier-body">
+            <h4>Dit krijg je</h4>
+            <ul class="check-list">
+              <li>VIP-plek bij het debat</li>
+              <li>Vroege toegang tot de AI-Agent</li>
+            </ul>
+            <button class="btn btn-primary" data-select-tier="35">Kies dit pakket</button>
+          </div>
+        </article>
+
+        <article class="tier-card tier-card--familie">
+          <span class="tier-badge">Populair</span>
+          <div class="tier-top">
+            <span class="tier-kind">Particulier</span>
+            <h3 class="tier-name">Just Familie</h3>
+            <div class="tier-amount">€60,-</div>
+          </div>
+          <div class="tier-body">
+            <h4>Dit krijg je</h4>
+            <ul class="check-list">
+              <li>VIP-plek bij het debat</li>
+              <li>Vroege toegang tot de AI-Agent</li>
+              <li class="is-plus">20% korting op de Relatietraining <span class="muted">in samenwerking met <a href="#bureau-liefhebbers">Bureau Liefhebbers</a></span></li>
+            </ul>
+            <button class="btn btn-primary" data-select-tier="60">Kies dit pakket</button>
+          </div>
+        </article>
+
+        <article class="tier-card tier-card--bedrijf">
+          <div class="tier-top">
+            <span class="tier-kind">Zakelijk</span>
+            <h3 class="tier-name">Just Bedrijf</h3>
+            <div class="tier-amount">€750,-</div>
+          </div>
+          <div class="tier-body">
+            <h4>Dit krijg je</h4>
+            <ul class="check-list">
+              <li>Logo bij het event</li>
+              <li class="is-plus">Gratis toegang voor 10 medewerkers tot de relatietraining <span class="muted">in samenwerking met <a href="#bureau-liefhebbers">Bureau Liefhebbers</a></span></li>
+            </ul>
+            <button class="btn btn-primary" data-select-tier="750">Kies dit pakket</button>
+          </div>
+        </article>
+
+        <article class="tier-card tier-card--partner">
+          <div class="tier-top">
+            <span class="tier-kind">Zakelijk</span>
+            <h3 class="tier-name">Just Debatpartner</h3>
+            <div class="tier-amount">€1.500,-</div>
+          </div>
+          <div class="tier-body">
+            <h4>Dit krijg je</h4>
+            <ul class="check-list">
+              <li>Genoemd vanaf het podium</li>
+              <li>Logo op de schermen</li>
+              <li>Een sessie over hoe de mentale last van thuis doorspeelt op kantoor</li>
+              <li class="is-plus">Gratis toegang voor 10 medewerkers tot de relatietraining <span class="muted">in samenwerking met <a href="#bureau-liefhebbers">Bureau Liefhebbers</a></span></li>
+            </ul>
+            <button class="btn btn-primary" data-select-tier="1500">Kies dit pakket</button>
+          </div>
+        </article>
+      </div>
+
+      <div class="tier-other">
+        <p><strong>Liever een ander bedrag?</strong> Elke bijdrage brengt de AI-Agent dichterbij.</p>
+        <button class="btn btn-outline" data-select-tier="anders">Kies je eigen bedrag</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ BUREAU LIEFHEBBERS ============ -->
+  <section class="section bg-off" id="bureau-liefhebbers">
+    <div class="container partner-grid">
+      <figure class="partner-photo">
+        <picture>
+          <source srcset="/assets/img/partners/bureau-liefhebbers.webp" type="image/webp">
+          <img src="/assets/img/partners/bureau-liefhebbers.jpg" width="1536" height="1025" loading="lazy"
+             alt="Veronne en Fleur van der Meijs van Bureau Liefhebbers, lachend naast elkaar">
+        </picture>
+        <span class="partner-sticker">Partner van Just &hearts;</span>
+        <figcaption>Veronne en Fleur van der Meijs &mdash; Bureau Liefhebbers</figcaption>
+      </figure>
+
+      <div class="partner-copy">
+        <span class="eyebrow">Onze partner</span>
+        <h2>Bureau Liefhebbers</h2>
+        <p class="lead" style="font-size:var(--fs-large);">Achter Bureau Liefhebbers staan de zussen Veronne en Fleur van der Meijs: allebei relatietherapeut én moeder.</p>
+        <p>Ze helpen ouders om midden in de drukte van het gezinsleven verbonden te blijven en tijd voor elkaar te houden. Geen zware diagnoses, maar scherpe inzichten, een eerlijke spiegel en praktische tips die je dezelfde avond nog kunt gebruiken. Daarnaast adviseren ze Just als experts, zodat de app gebouwd blijft op praktijkkennis over relaties.</p>
+
+        <div class="partner-perks">
+          <h3>Wat betekent dit voor jou?</h3>
+          <ul class="check-list">
+            <li><strong>Just Familie</strong> &mdash; 20% korting op de Relatietraining</li>
+            <li><strong>Just Bedrijf</strong> &mdash; 10 medewerkers gratis naar de relatietraining</li>
+            <li><strong>Just Debatpartner</strong> &mdash; 10 medewerkers gratis naar de relatietraining</li>
+          </ul>
         </div>
 
-        <div class="tier-card tier-card--featured">
-          <span class="tier-badge" style="font-size:var(--fs-small); color:#6b6b70; font-weight:700";> <b> Populair </b> </span>
-          <div class="tier-amount">€60,-</div>
-          <div class="tier-name"> <b> Just Familie </b> </div>
-          <p class="tier-desc">VIP-plek bij het debat + vroege toegang tot de AI-Agent + 20% korting op de Relatietraining in samenwerking met Bureau Liefhebbers.</p>
-          <button class="btn btn-primary" data-select-tier="60">Kies dit pakket</button>
-           <br></br>
-        </div>
-
-        <div class="tier-card">
-          <div class="tier-amount">€750,-</div>
-          <div class="tier-name"> <b> Just Bedrijf </b> </div>
-          <p class="tier-desc">Logo bij het event en gratis toegang voor 10 medewerkers voor de relatietraining in samenwerking met Bureau Liefhebbers.</p>
-          <button class="btn btn-primary" data-select-tier="750">Kies dit pakket</button>
-           <br></br>
-        </div>
-
-        <div class="tier-card">
-          <div class="tier-amount">€1.500,-</div>
-          <div class="tier-name"> <b> Just Debatpartner</b></div>
-          <p class="tier-desc">Genoemd vanaf het podium, logo op de schermen, een sessie over hoe de mentale last van thuis doorspeelt op kantoor, en gratis toegang voor 10 medewerkers voor de relatietraining in samenwerking met Bureau Liefhebbers</p>
-          <button class="btn btn-primary" data-select-tier="1500">Kies dit pakket</button>
-           <br></br>
+        <div class="badge-row">
+          <a href="#pakketten" class="btn btn-primary">Bekijk de pakketten</a>
+          <a href="https://bureauliefhebbers.com/" class="btn btn-outline" target="_blank" rel="noopener">Naar Bureau Liefhebbers</a>
         </div>
       </div>
     </div>
@@ -174,27 +334,26 @@
         <div class="amount-grid" role="radiogroup" aria-label="Kies een donatiebedrag">
           <label class="amount-option">
             <input type="radio" name="bedrag" value="35">
-            €35,- <span>Debatbezoeker</span>
+            €35,- <span>Just VIP</span>
           </label>
           <label class="amount-option">
             <input type="radio" name="bedrag" value="60">
-            €60,- <span>Founding Family</span>
+            €60,- <span>Just Familie</span>
           </label>
           <label class="amount-option">
             <input type="radio" name="bedrag" value="750">
-            €750,- <span>Bedrijf</span>
+            €750,- <span>Just Bedrijf</span>
           </label>
           <label class="amount-option">
             <input type="radio" name="bedrag" value="1500">
-            €1.500,- <span>Debatpartner</span>
+            €1.500,- <span>Just Debatpartner</span>
           </label>
           <label class="amount-option">
             <input type="radio" name="bedrag" value="anders">
-            Ander bedrag
+            Ander bedrag <span>Elk bedrag helpt</span>
           </label>
         </div>
-        <input type="number" id="custom-bedrag" name="bedrag_anders" min="1" step="1" placeholder="Vul je bedrag in (€)" hidden
-               class="form-group" style="width:100%; padding:14px 16px; border:2px solid var(--color-light-grey); border-radius:var(--radius-s); margin-bottom:20px; font-family:var(--font-body); font-size:var(--fs-medium);">
+        <input type="number" id="custom-bedrag" name="bedrag_anders" min="1" step="1" placeholder="Vul je bedrag in (€)" hidden>
 
         <h3 style="margin:28px 0 16px;">2. Jouw gegevens</h3>
         <div class="form-group">
