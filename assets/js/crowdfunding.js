@@ -133,10 +133,10 @@ document.addEventListener('DOMContentLoaded', function () {
   // Mollie- of Stripe-paylink (zie README.md).
   var PAYMENT_LINKS = {
     mollie: {
-      35:   'https://payment-links.mollie.com/payment/2UuBnejGFMVpEEhWvWbxN',
-      60:   'https://payment-links.mollie.com/payment/DWEHBU3W92RcYgRcdie7c',
-      750:  'https://payment-links.mollie.com/payment/N977RDaLq8JYZmSpVU37z',
-      1500: 'https://payment-links.mollie.com/payment/WayxptDyqChtdfAMPWHxi'
+      35:   'https://payment-links.mollie.com/payment/yiuQukqmuKdzvyrihEe5m',
+      60:   'https://payment-links.mollie.com/payment/nfuZzHJEaPy7JKBkDHMYH',
+      750:  'https://payment-links.mollie.com/payment/CkuJiwzuTjncoxMRJvVp2',
+      1500: 'https://payment-links.mollie.com/payment/pGWjH5fw4cfY82z9TVv3B'
     }
     /*stripe: {
       35:   'https://buy.stripe.com/VERVANG-STRIPE-LINK-35',
