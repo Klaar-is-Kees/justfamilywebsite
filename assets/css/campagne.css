@@ -583,3 +583,10 @@
   .tally-strip, .gauge-fill, .mbar-fill { transition: none !important; }
   .live-dot { animation: none !important; }
 }
+
+:root { --color-dark-blue: #1f3a9e; }
+#main a:not(.btn):not(.tally-button) { transition: color 0.15s ease; }
+#main a:not(.btn):not(.tally-button):hover,
+#main a:not(.btn):not(.tally-button):focus-visible {
+  color: var(--color-dark-blue);
+}
