@@ -16,5 +16,8 @@
     "llms.txt": "llms.txt"
   },
   "replacements": [],
-  "exclude": ["campagne.html"]
+  "exclude": [
+    "campagne.html",
+    "just-fair-check.html"
+  ]
 }
