@@ -234,7 +234,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // --- Carousel (bv. experts-sectie): automatisch doorschuiven + pijlen ---
+ // --- Carousel (bv. experts-sectie): automatisch doorschuiven + pijlen ---
   document.querySelectorAll('[data-carousel]').forEach(function (carousel) {
     var track = carousel.querySelector('[data-carousel-track]');
     var prevBtn = carousel.querySelector('[data-carousel-prev]');
@@ -247,19 +247,8 @@ document.addEventListener('DOMContentLoaded', function () {
     var autoplayDelay = 4500;
     var autoplayTimer = null;
 
-    // Dots opnieuw opbouwen (voorkomt dubbele dots bij een herlaad van dit script)
     var dots = [];
-    if (dotsWrap) {
-      dotsWrap.innerHTML = '';
-      items.forEach(function (item, i) {
-        var dot = document.createElement('button');
-        dot.type = 'button';
-        dot.setAttribute('aria-label', T.carouselSlide + (i + 1));
-        dot.addEventListener('click', function () { goTo(i); restartAutoplay(); });
-        dotsWrap.appendChild(dot);
-        dots.push(dot);
-      });
-    }
+    var positions = 1; // aantal posities dat écht bereikbaar is (bv. 5 kaarten, 4 zichtbaar = 2)
 
     function getStep() {
       var trackStyles = window.getComputedStyle(track);
@@ -267,9 +256,35 @@ document.addEventListener('DOMContentLoaded', function () {
       return items[0].getBoundingClientRect().width + gap;
     }
 
+    function getPositions() {
+      var maxScroll = track.scrollWidth - track.clientWidth;
+      if (maxScroll <= 1) return 1;
+      return Math.min(items.length, Math.ceil(maxScroll / getStep() - 0.01) + 1);
+    }
+
+    // Dots (opnieuw) opbouwen: één per bereikbare positie, niet per kaart
+    function buildDots() {
+      positions = getPositions();
+      if (!dotsWrap) return;
+      dotsWrap.innerHTML = '';
+      dots = [];
+      if (positions < 2) return;
+      for (var i = 0; i < positions; i++) {
+        (function (i) {
+          var dot = document.createElement('button');
+          dot.type = 'button';
+          dot.setAttribute('aria-label', T.carouselSlide + (i + 1));
+          dot.addEventListener('click', function () { goTo(i); restartAutoplay(); });
+          dotsWrap.appendChild(dot);
+          dots.push(dot);
+        })(i);
+      }
+    }
+
     function goTo(index) {
-      currentIndex = (index + items.length) % items.length; // oneindige lus
-      track.scrollTo({ left: currentIndex * getStep(), behavior: 'smooth' });
+      currentIndex = (index + positions) % positions; // oneindige lus over bereikbare posities
+      var maxScroll = track.scrollWidth - track.clientWidth;
+      track.scrollTo({ left: Math.min(currentIndex * getStep(), maxScroll), behavior: 'smooth' });
       updateUI();
     }
 
@@ -279,12 +294,15 @@ document.addEventListener('DOMContentLoaded', function () {
     function updateUI() {
       dots.forEach(function (d, i) { d.classList.toggle('is-active', i === currentIndex); });
       // Oneindige lus: pijlen blijven altijd klikbaar
-      if (prevBtn) prevBtn.disabled = false;
-      if (nextBtn) nextBtn.disabled = false;
+      // en verdwijnen als alle kaarten al in beeld passen
+      if (prevBtn) { prevBtn.disabled = false; prevBtn.hidden = positions < 2; }
+      if (nextBtn) { nextBtn.disabled = false; nextBtn.hidden = positions < 2; }
     }
 
     function startAutoplay() {
       stopAutoplay();
+      if (positions < 2) return; // alles past al in beeld: niets te schuiven
+      if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
       autoplayTimer = setInterval(next, autoplayDelay);
     }
     function stopAutoplay() {
@@ -305,13 +323,21 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Houd de actieve dot in sync als iemand handmatig sleept/swiped
     track.addEventListener('scroll', debounce(function () {
-      var index = Math.round(track.scrollLeft / getStep());
-      currentIndex = Math.max(0, Math.min(items.length - 1, index));
+      var maxScroll = track.scrollWidth - track.clientWidth;
+      var index = track.scrollLeft >= maxScroll - 2
+        ? positions - 1
+        : Math.round(track.scrollLeft / getStep());
+      currentIndex = Math.max(0, Math.min(positions - 1, index));
       updateUI();
     }, 100), { passive: true });
 
-    window.addEventListener('resize', debounce(function () { goTo(currentIndex); }, 150));
+    window.addEventListener('resize', debounce(function () {
+      buildDots();
+      goTo(Math.min(currentIndex, positions - 1));
+      startAutoplay();
+    }, 150));
 
+    buildDots();
     updateUI();
     startAutoplay();
 
