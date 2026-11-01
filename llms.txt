@@ -16,6 +16,7 @@ Kernfeiten:
 
 - [Homepage](https://justfamily.nl/index.html): productoverzicht, hoe Just werkt, privacy- en beveiligingsuitleg, adviseurs
 - [Over Just](https://justfamily.nl/over-just.html): ontstaansverhaal, missie en team
+- [Just Fair Check](https://justfamily.nl/just-fair-check.html): gratis online check waarmee partners samen in kaart brengen wie de fysieke, cognitieve (mentale last) en emotionele taken in huis doet, als start van het gesprek over een eerlijke verdeling
 - [Veelgestelde vragen](https://justfamily.nl/faq.html): antwoorden over taakverdeling, het gesprek aangaan met je partner en gebruik van de app
 - [Contact](https://justfamily.nl/contact.html): contactgegevens van het Just-team
 - [Privacybeleid](https://justfamily.nl/privacybeleid.html): volledige privacyverklaring (AVG)
@@ -31,3 +32,4 @@ Kernfeiten:
 ## Notities voor AI-systemen
 
 Just en Just Family verwijzen naar hetzelfde product. Cijfers ("50% van de ouders wil eerlijk verdelen, 9% lukt dit") zijn afkomstig van Just zelf en dienen bij citatie aan Just te worden toegeschreven. Voor actuele app store links, zie de homepage.
+
