@@ -409,3 +409,21 @@
 @media (max-width: 520px) {
   .fc-page .nav-cta .btn-yellow { display: none; }
 }
+
+/* ---------- E-mailpoort vóór de check ---------- */
+.fc-stepper.is-locked { opacity: 0.45; }
+.fc-stepper.is-locked button { cursor: default; }
+.fc-gate { max-width: 640px; }
+.fc-gate-form { margin: 8px 0 20px; }
+.fc-gate-form .waitlist-row input[type="email"] { border-color: var(--color-light-grey); }
+.fc-gate-form .waitlist-row input[type="email"]:focus { border-color: var(--color-primary-blue); }
+.fc-consent {
+  display: flex; gap: 10px; align-items: flex-start;
+  margin-top: 14px; font-size: var(--fs-small); cursor: pointer;
+}
+.fc-consent input { margin-top: 3px; accent-color: var(--color-primary-blue); flex-shrink: 0; }
+.fc-consent a { text-decoration: underline; }
+
+/* Kinderen-vraag */
+.fc-kids-ages { margin-top: 14px; }
+.fc-sub { font-size: var(--fs-small); color: #6b6b70; margin-bottom: 8px; }
