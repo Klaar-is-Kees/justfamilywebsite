@@ -169,3 +169,16 @@ Een écht live teller (die automatisch meetelt zodra iemand betaalt) vereist een
 | Off-white | `#fbfaf3` |
 
 Font: **Manrope** (Google Fonts), body-gewicht 300, koppen 700–800.
+
+## Just Fair Check (`just-fair-check.html`)
+
+Interactieve landingspagina waarop partners samen in kaart brengen wie de **fysieke** (het doen), **cognitieve** (het denken / mentale last) en **emotionele** (het zorgen) taken in huis doet — als opening voor het gesprek over een eerlijke verdeling.
+
+- **Bestanden:** `just-fair-check.html`, `assets/css/fair-check.css`, `assets/js/fair-check.js`.
+- **Takenlijst:** staat bovenin `assets/js/fair-check.js` (array `TASKS`) en komt uit `KeywordTaskList.xlsx`. Per taak: `freq` (keer per week) en `min` (minuten per keer), net als in de Excel; `show`/`hide` volgen de keywords ("If not keyword"). Taken met `extra: true` zijn aanvullingen voor de check die (nog) niet in de Excel staan. Taak aanpassen = alleen deze array aanpassen.
+- **Berekening:** fysieke taken wegen mee in tijd per week (freq × min). Cognitieve en emotionele taken tellen per taak even zwaar, omdat denk- en zorgwerk zich slecht in minuten laat vangen.
+- **Privacy:** antwoorden worden alleen in `localStorage` op het apparaat van de bezoeker bewaard; er wordt niets verstuurd.
+- **E-mailpoort:** na de intro laten bezoekers eerst hun e-mailadres achter (verplicht akkoord met het privacybeleid, optioneel vinkje voor updates over de AI-Assistent). Het adres gaat via Formspree naar hetzelfde formulier als de aanmelding op de homepage (`https://formspree.io/f/xwlvkgro`), met het veld `bron = just-fair-check`. Apart formulier gewenst? Pas `FORM_ENDPOINT` bovenin `assets/js/fair-check.js` aan. Op het apparaat wordt alleen onthouden *dát* iemand zich heeft aangemeld, niet het adres zelf. Let op: dit is een poort aan de voorkant (geen echte toegangsbeveiliging) en vermeld de Fair Check bij voorkeur ook in `privacybeleid.html`.
+- **Kinderen:** in stap 1 kiezen partners eerst "Hebben jullie kinderen? Ja/Nee". Bij "Nee" worden alle taken die met kinderen te maken hebben verborgen; bij "Ja" kiezen ze de leeftijdsgroep(en).
+- **Alleen Nederlands:** de pagina staat in `exclude` in `i18n/config.json`, omdat de teksten van de check in JavaScript staan en de DeepL-build die niet vertaalt. De EN-knop linkt naar de Engelse homepage.
+- Gelinkt vanuit de footer van alle NL-pagina's en vanuit de sectie "Hoe stem jij het huishouden af met je partner?" op de homepage; opgenomen in `sitemap.xml` en `llms.txt`.
