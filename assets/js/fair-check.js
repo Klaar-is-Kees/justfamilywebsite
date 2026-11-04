@@ -344,7 +344,7 @@
         '<div class="fc-head">' +
           '<span class="eyebrow">Voordat jullie beginnen</span>' +
           '<h3>Laat je e-mailadres achter en start de check</h3>' +
-          '<p>De Just Fair Check is gratis. Laat je e-mailadres achter, dan houden we je op de hoogte van nieuwe tips over een eerlijke verdeling en van de Just AI-Assistent.</p>' +
+          '<p>De Just Fair Check is gratis. Laat eerst je e-mailadres achter.</p>' +
         '</div>' +
         '<form class="fc-gate-form" data-fc-gate novalidate>' +
           '<input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="display:none;" aria-hidden="true">' +
