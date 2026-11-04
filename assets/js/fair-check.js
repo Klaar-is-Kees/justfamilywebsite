@@ -24,10 +24,10 @@
   var PETS = ['kat', 'hond', 'huisdier'];
 
   var SITUATIONS = [
-    { id: 'kids04', label: 'Kinderen 0–4 jaar', group: 'gezin' },
-    { id: 'kids412', label: 'Kinderen 4–12 jaar', group: 'gezin' },
-    { id: 'kids12', label: 'Kinderen 12+', group: 'gezin' },
-    { id: 'mantelzorg', label: 'Mantelzorg', group: 'gezin' },
+    { id: 'kids04', label: '0–4 jaar', group: 'kids' },
+    { id: 'kids412', label: '4–12 jaar', group: 'kids' },
+    { id: 'kids12', label: '12 jaar en ouder', group: 'kids' },
+    { id: 'mantelzorg', label: 'Mantelzorg voor een naaste', group: 'zorg' },
     { id: 'kat', label: 'Kat', group: 'dieren' },
     { id: 'hond', label: 'Hond', group: 'dieren' },
     { id: 'huisdier', label: 'Ander huisdier', group: 'dieren' },
@@ -73,7 +73,8 @@
       title: 'Emotionele taken',
       short: 'Emotioneel',
       verb: 'Het zorgen',
-      intro: 'Aandacht, troost, sfeer en verbinding: met de kinderen, met familie en met elkaar. Vaak onzichtbaar, maar het kost wel energie.',
+      intro: 'Aandacht, troost, sfeer en verbinding: met familie, met elkaar en (als jullie die hebben) met de kinderen. Vaak onzichtbaar, maar het kost wel energie.',
+      introNoKids: 'Aandacht, sfeer en verbinding: met familie, vrienden en met elkaar. Vaak onzichtbaar, maar het kost wel energie.',
       question: 'Wanneer voelde jij je de afgelopen tijd écht gesteund door de ander?'
     }
   ];
@@ -142,8 +143,8 @@
 
     // ---------------- COGNITIEF ----------------
     { id: 'weekmenu', cat: 'cognitief', name: 'Weekmenu bedenken & boodschappenlijst maken', extra: true },
-    { id: 'voorraad', cat: 'cognitief', name: 'Bijhouden wat er op raakt (wc-papier, wasmiddel, luiers)', extra: true },
-    { id: 'gezinsagenda', cat: 'cognitief', name: 'Gezinsagenda bijhouden & afspraken afstemmen', extra: true },
+    { id: 'voorraad', cat: 'cognitief', name: 'Bijhouden wat er op raakt (wc-papier, wasmiddel)', extra: true },
+    { id: 'gezinsagenda', cat: 'cognitief', name: 'Gedeelde agenda bijhouden & afspraken afstemmen', extra: true },
     { id: 'bezorgservice', cat: 'cognitief', name: 'Boodschappen-bezorgservice regelen', freq: 2, min: 10, show: ['bezorgservice'] },
     { id: 'huisadministratie', cat: 'cognitief', name: 'Huisadministratie', freq: 0.25, min: 10 },
     { id: 'verjaardagen', cat: 'cognitief', name: 'Verjaardagen herinneren & regelen', freq: 0.25, min: 10 },
@@ -151,7 +152,7 @@
     { id: 'dokter', cat: 'cognitief', name: 'Dokter/tandarts regelen', freq: 0.25, min: 10 },
     { id: 'monteurs', cat: 'cognitief', name: 'Monteurs inschakelen (o.a. elektra, loodgieter)', freq: 0.1, min: 10 },
     { id: 'feestdagen', cat: 'cognitief', name: 'Feestdagen organiseren (o.a. Kerst, Pasen)', freq: 0.1, min: 10 },
-    { id: 'gezinsuitje', cat: 'cognitief', name: 'Gezinsuitje regelen', freq: 0.1, min: 10 },
+    { id: 'gezinsuitje', cat: 'cognitief', name: 'Gezinsuitje regelen', freq: 0.1, min: 10, show: KIDS },
     { id: 'vakantie', cat: 'cognitief', name: 'Vakantie boeken', freq: 0.1, min: 10 },
     { id: 'anticonceptie', cat: 'cognitief', name: 'Anticonceptie verzorgen', freq: 1, min: 5 },
     { id: 'apk', cat: 'cognitief', name: 'Auto APK', freq: 0.1, min: 10, show: ['auto'] },
@@ -193,10 +194,16 @@
   ];
   var SHARE = { a: 1, ma: 0.75, s: 0.5, mb: 0.25, b: 0 };
 
+  // E-mailadressen gaan naar hetzelfde Formspree-formulier als de aanmelding op de homepage,
+  // met bron = "just-fair-check". Wil je ze apart ontvangen? Maak een nieuw Formspree-formulier en zet de URL hier.
+  var FORM_ENDPOINT = 'https://formspree.io/f/xwlvkgro';
+
   var STORE_KEY = 'justfamily-fair-check-v1';
   var STEPS = ['start', 'fysiek', 'cognitief', 'emotioneel', 'resultaat'];
 
-  var state = load() || {
+  var DEFAULT_STATE = {
+    unlocked: false,      // e-mailadres achtergelaten? (we bewaren alleen dít vinkje, niet het adres zelf)
+    kids: null,           // null = nog niet beantwoord, true/false
     names: { a: '', b: '' },
     situation: DEFAULT_SITUATION.slice(),
     house: 'm',
@@ -205,6 +212,11 @@
     custom: [],
     step: 'start'
   };
+  var state = load() || {};
+  Object.keys(DEFAULT_STATE).forEach(function (k) {
+    if (state[k] === undefined) state[k] = JSON.parse(JSON.stringify(DEFAULT_STATE[k]));
+  });
+  if (!state.unlocked) state.step = 'start';
 
   var root = document.querySelector('[data-fair-check]');
   if (!root) return;
@@ -235,7 +247,10 @@
       b: (state.names.b || '').trim() || 'Partner 2'
     };
   }
-  function has(id) { return state.situation.indexOf(id) !== -1; }
+  function has(id) {
+    if (KIDS.indexOf(id) !== -1 && state.kids !== true) return false;
+    return state.situation.indexOf(id) !== -1;
+  }
   function visible(task) {
     if (task.show && !task.show.some(has)) return false;
     if (task.hide && task.hide.some(has)) return false;
@@ -298,7 +313,8 @@
     root.innerHTML =
       renderStepper() +
       '<div class="fc-panel" tabindex="-1" data-fc-panel>' +
-      (state.step === 'start' ? renderStart(n)
+      (!state.unlocked ? renderGate()
+        : state.step === 'start' ? renderStart(n)
         : state.step === 'resultaat' ? renderResults(n)
         : renderCategory(state.step, n)) +
       '</div>';
@@ -307,24 +323,59 @@
 
   function renderStepper() {
     var labels = { start: 'Jullie', fysiek: 'Fysiek', cognitief: 'Cognitief', emotioneel: 'Emotioneel', resultaat: 'Uitkomst' };
-    var current = STEPS.indexOf(state.step);
-    return '<ol class="fc-stepper" aria-label="Stappen van de check">' + STEPS.map(function (s, i) {
+    var current = state.unlocked ? STEPS.indexOf(state.step) : -1;
+    return '<ol class="fc-stepper' + (state.unlocked ? '' : ' is-locked') + '" aria-label="Stappen van de check">' + STEPS.map(function (s, i) {
       var cls = i === current ? 'is-current' : (i < current ? 'is-done' : '');
       var count = '';
-      if (s !== 'start' && s !== 'resultaat') {
+      if (state.unlocked && s !== 'start' && s !== 'resultaat') {
         var sc = score(s);
         count = '<small>' + sc.answered + '/' + sc.total + '</small>';
       }
       return '<li class="fc-step fc-step--' + s + ' ' + cls + '">' +
-        '<button type="button" data-fc-goto="' + s + '"' + (i === current ? ' aria-current="step"' : '') + '>' +
+        '<button type="button" data-fc-goto="' + s + '"' + (i === current ? ' aria-current="step"' : '') + (state.unlocked ? '' : ' disabled') + '>' +
         '<span class="fc-step-num">' + (i + 1) + '</span><span class="fc-step-label">' + labels[s] + '</span>' + count +
         '</button></li>';
     }).join('') + '</ol>';
   }
 
+  function renderGate() {
+    return '' +
+      '<div class="fc-gate">' +
+        '<div class="fc-head">' +
+          '<span class="eyebrow">Voordat jullie beginnen</span>' +
+          '<h3>Laat je e-mailadres achter en start de check</h3>' +
+          '<p>De Just Fair Check is gratis. Laat je e-mailadres achter, dan houden we je op de hoogte van nieuwe tips over een eerlijke verdeling en van de Just AI-Assistent.</p>' +
+        '</div>' +
+        '<form class="fc-gate-form" data-fc-gate novalidate>' +
+          '<input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="display:none;" aria-hidden="true">' +
+          '<div class="waitlist-row">' +
+            '<label for="fc-email" class="sr-only">E-mailadres</label>' +
+            '<input type="email" id="fc-email" name="email" placeholder="Jouw e-mailadres" required autocomplete="email">' +
+            '<button type="submit" class="btn btn-primary">Start de check &rarr;</button>' +
+          '</div>' +
+          '<label class="fc-consent"><input type="checkbox" name="akkoord_privacy" value="ja" required> ' +
+            '<span>Ik ga akkoord met het <a href="/privacybeleid.html" target="_blank" rel="noopener">privacybeleid</a> van Just.</span></label>' +
+          '<label class="fc-consent"><input type="checkbox" name="updates_ai_assistent" value="ja"> ' +
+            '<span>Houd me ook op de hoogte van de Just AI-Assistent (optioneel).</span></label>' +
+          '<p class="form-feedback" role="status" data-fc-gate-feedback></p>' +
+        '</form>' +
+        '<p class="fc-privacy">🔒 We gebruiken je e-mailadres alleen voor Just en delen het niet. De antwoorden die jullie in de check geven blijven op dit apparaat en worden niet verstuurd.</p>' +
+      '</div>';
+  }
+
   function renderStart(n) {
-    var groups = { gezin: 'Gezin & zorg', dieren: 'Huisdieren', huis: 'Huis & buiten', hulp: 'Hulp & apparaten' };
-    var chips = Object.keys(groups).map(function (g) {
+    var groups = { dieren: 'Huisdieren', huis: 'Huis & buiten', hulp: 'Hulp & apparaten', zorg: 'Zorg' };
+    var kidsQ = '<fieldset class="fc-chipset fc-kids"><legend>Hebben jullie (thuiswonende) kinderen?</legend><div class="fc-chips">' +
+      '<label class="fc-chip"><input type="radio" name="fc-kids" data-fc-kids value="nee"' + (state.kids === false ? ' checked' : '') + '><span>Nee</span></label>' +
+      '<label class="fc-chip"><input type="radio" name="fc-kids" data-fc-kids value="ja"' + (state.kids === true ? ' checked' : '') + '><span>Ja</span></label>' +
+      '</div>' +
+      '<div class="fc-kids-ages"' + (state.kids === true ? '' : ' hidden') + ' data-fc-kids-ages><p class="fc-sub">In welke leeftijd? Meerdere antwoorden mogelijk.</p><div class="fc-chips">' +
+        SITUATIONS.filter(function (s) { return s.group === 'kids'; }).map(function (s) {
+          return '<label class="fc-chip"><input type="checkbox" data-fc-situation value="' + s.id + '"' +
+            (state.situation.indexOf(s.id) !== -1 ? ' checked' : '') + '><span>' + s.label + '</span></label>';
+        }).join('') +
+      '</div></div></fieldset>';
+    var chips = kidsQ + Object.keys(groups).map(function (g) {
       return '<fieldset class="fc-chipset"><legend>' + groups[g] + '</legend><div class="fc-chips">' +
         SITUATIONS.filter(function (s) { return s.group === g; }).map(function (s) {
           return '<label class="fc-chip"><input type="checkbox" data-fc-situation value="' + s.id + '"' +
@@ -355,7 +406,8 @@
       '<div class="fc-nav">' +
         '<span class="fc-privacy">🔒 Jullie antwoorden blijven op dit apparaat. Er wordt niets verstuurd.</span>' +
         '<button type="button" class="btn btn-primary" data-fc-goto="fysiek">Start met fysieke taken &rarr;</button>' +
-      '</div>';
+      '</div>' +
+      '<p class="form-feedback form-feedback--error" role="status" data-fc-start-feedback></p>';
   }
 
   function renderCategory(catId, n) {
@@ -401,7 +453,7 @@
       '<div class="fc-head fc-head--' + catId + '">' +
         '<span class="eyebrow">Stap ' + (idx + 1) + ' · ' + cat.verb + '</span>' +
         '<h3>' + cat.title + '</h3>' +
-        '<p>' + cat.intro + '</p>' +
+        '<p>' + (state.kids !== true && cat.introNoKids ? cat.introNoKids : cat.intro) + '</p>' +
         '<p class="fc-tip"><strong>Wie doet dit nu meestal?</strong> Kies samen één antwoord. Zien jullie het anders? Kies dan wat het dichtst in de buurt komt en zet de taak op <em>💬 bespreken</em>.</p>' +
       '</div>' +
       '<div class="fc-progress"><div class="fc-progress-bar"><span style="width:' + (sc.total ? pct(sc.answered / sc.total) : 0) + '%"></span></div>' +
@@ -567,6 +619,24 @@
   // ---------------------------------------------------------------------------
   // Events
   function go(step, focus) {
+    if (!state.unlocked) step = 'start';
+    if (state.unlocked && step !== 'start' && state.kids === null) {
+      step = 'start';
+      state.step = step; save(); render();
+      var fb = root.querySelector('[data-fc-start-feedback]');
+      if (fb) fb.textContent = 'Geef eerst aan of jullie kinderen hebben, dan laten we alleen de taken zien die bij jullie passen.';
+      var k = root.querySelector('.fc-kids');
+      if (k) k.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+    if (state.unlocked && step !== 'start' && state.kids === true &&
+        !KIDS.some(function (k) { return state.situation.indexOf(k) !== -1; })) {
+      step = 'start';
+      state.step = step; save(); render();
+      var fb2 = root.querySelector('[data-fc-start-feedback]');
+      if (fb2) fb2.textContent = 'Kies nog de leeftijd van jullie kinderen.';
+      return;
+    }
     state.step = step;
     save();
     render();
@@ -593,6 +663,43 @@
         save();
         updateStepper();
       });
+    });
+    root.querySelectorAll('[data-fc-kids]').forEach(function (r) {
+      r.addEventListener('change', function () {
+        state.kids = r.value === 'ja';
+        var ages = root.querySelector('[data-fc-kids-ages]');
+        if (ages) ages.hidden = !state.kids;
+        var fb = root.querySelector('[data-fc-start-feedback]');
+        if (fb) fb.textContent = '';
+        save();
+        updateStepper();
+      });
+    });
+    var gate = root.querySelector('[data-fc-gate]');
+    if (gate) gate.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var fb = gate.querySelector('[data-fc-gate-feedback]');
+      var email = gate.querySelector('input[type="email"]');
+      var consent = gate.querySelector('input[name="akkoord_privacy"]');
+      var btn = gate.querySelector('button[type="submit"]');
+      function say(msg, type) { fb.textContent = msg; fb.className = 'form-feedback form-feedback--' + type; }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) { say('Vul een geldig e-mailadres in.', 'error'); email.focus(); return; }
+      if (!consent.checked) { say('Ga akkoord met het privacybeleid om de check te starten.', 'error'); return; }
+      var data = new FormData(gate);
+      data.append('_subject', 'Nieuwe deelnemer Just Fair Check — justfamily.nl');
+      data.append('bron', 'just-fair-check');
+      btn.disabled = true;
+      say('Even geduld…', 'success');
+      fetch(FORM_ENDPOINT, { method: 'POST', body: data, headers: { 'Accept': 'application/json' } })
+        .then(function (res) {
+          if (!res.ok) throw new Error('bad status');
+          state.unlocked = true;
+          go('start');
+        })
+        .catch(function () {
+          btn.disabled = false;
+          say('Er ging iets mis bij het versturen. Controleer je verbinding en probeer het opnieuw.', 'error');
+        });
     });
     root.querySelectorAll('[data-fc-house]').forEach(function (r) {
       r.addEventListener('change', function () { state.house = r.value; save(); });
@@ -658,7 +765,7 @@
     if (pr) pr.addEventListener('click', function () { window.print(); });
     var reset = root.querySelector('[data-fc-reset]');
     if (reset) reset.addEventListener('click', function () {
-      state.answers = {}; state.talk = {}; state.custom = [];
+      state.answers = {}; state.talk = {}; state.custom = []; state.kids = null;
       go('start');
     });
   }
