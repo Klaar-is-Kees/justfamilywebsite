@@ -1,4 +1,4 @@
-// Just Fair Check — interactieve check voor partners
+// Just Check — interactieve check voor partners
 // ---------------------------------------------------------------------------
 // Alles draait in de browser: antwoorden worden alleen lokaal (localStorage)
 // op dit apparaat bewaard en nergens naartoe gestuurd.
@@ -10,7 +10,7 @@
 //   tijd per week = freq × min  (zelfde formule als kolom H in de Excel)
 //   show  = taak alleen tonen als één van deze situaties is aangevinkt
 //   hide  = taak verbergen als deze situatie is aangevinkt (kolom "If not keyword")
-//   extra = aanvulling voor de Fair Check, staat (nog) niet in de Excel
+//   extra = aanvulling voor de Check, staat (nog) niet in de Excel
 //
 // Fysieke taken worden gewogen in tijd. Cognitieve en emotionele taken tellen
 // per taak even zwaar mee: denk- en zorgwerk laat zich slecht in minuten vangen.
@@ -344,7 +344,7 @@
         '<div class="fc-head">' +
           '<span class="eyebrow">Voordat jullie beginnen</span>' +
           '<h3>Laat je e-mailadres achter en start de check</h3>' +
-          '<p>De Just Fair Check is gratis. Laat eerst je e-mailadres achter.</p>' +
+          '<p>De Just Check is gratis. Laat eerst je e-mailadres achter.</p>' +
         '</div>' +
         '<form class="fc-gate-form" data-fc-gate novalidate>' +
           '<input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="display:none;" aria-hidden="true">' +
@@ -599,7 +599,7 @@
 
   function summaryText() {
     var n = names();
-    var lines = ['Onze Just Fair Check — ' + n.a + ' & ' + n.b, ''];
+    var lines = ['Onze Just Check — ' + n.a + ' & ' + n.b, ''];
     CATEGORIES.forEach(function (c) {
       var s = score(c.id);
       if (s.shareA === null) { lines.push(c.title + ': nog niet ingevuld'); return; }
@@ -686,7 +686,7 @@
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) { say('Vul een geldig e-mailadres in.', 'error'); email.focus(); return; }
       if (!consent.checked) { say('Ga akkoord met het privacybeleid om de check te starten.', 'error'); return; }
       var data = new FormData(gate);
-      data.append('_subject', 'Nieuwe deelnemer Just Fair Check — justfamily.nl');
+      data.append('_subject', 'Nieuwe deelnemer Just Check — justfamily.nl');
       data.append('bron', 'just-fair-check');
       btn.disabled = true;
       say('Even geduld…', 'success');
