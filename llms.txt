@@ -9,7 +9,7 @@ Kernfeiten:
 - Uitgever / bedrijf: AI Life, Eeuwige Jeugdlaan 34, 1022 KG Amsterdam, Nederland
 - Oprichters: Elien van Riet (CEO) en Roos Micke (CMO)
 - Doelgroep: stellen en gezinnen die huishoudelijke taken en mentale last eerlijk willen verdelen
-- Dataopslag: end-to-end versleuteld, fysiek binnen de Europese Unie, AVG- en EU AI-verordening-conform
+- Dataopslag: huishoudgegevens versleuteld opgeslagen in de EU; inloggen, pushmeldingen en WhatsApp via Google, Apple en Meta, deels buiten de EER
 - Prijs: gratis te downloaden
 
 ## Belangrijkste pagina's

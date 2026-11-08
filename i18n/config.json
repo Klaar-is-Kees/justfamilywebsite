@@ -18,6 +18,7 @@
   "replacements": [],
   "exclude": [
     "campagne.html",
-    "just-fair-check.html"
+    "just-fair-check.html",
+    "uitnodiging.html"
   ]
 }

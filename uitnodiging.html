@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="referrer" content="no-referrer">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Uitnodiging — Just Family</title>
+
+<!-- Favicons -->
+<link rel="icon" href="/assets/img/favicon.ico" sizes="any">
+<link rel="icon" href="/assets/img/icons/just-icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#5578f6">
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="/assets/css/style.css">
+<style>
+  .invite {
+    box-sizing: border-box;
+    min-height: 100vh;
+    min-height: 100svh;
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 32px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
+  .invite-logo { height: 64px; width: auto; margin: 0 auto 28px; }
+  .invite h1 { font-size: 2rem; line-height: 1.2; margin: 0 0 16px; }
+  .invite-text { margin: 0 0 24px; }
+  .invite-open { width: 100%; box-sizing: border-box; justify-content: center; font-size: 1.25rem; padding: 20px 30px; }
+  .invite-stores { margin-top: 40px; }
+  .invite-stores p { font-size: 0.95rem; margin: 0 0 16px; }
+  .invite-stores .badge-row { justify-content: center; }
+  .invite-stores img { display: block; height: 40px; width: auto; }
+  /* De Google Play-afbeelding heeft transparante rand; zo ogen beide badges even groot. */
+  .invite-stores img.invite-badge-play { height: 60px; }
+  .invite-privacy { margin-top: 32px; font-size: 0.85rem; }
+</style>
+</head>
+<body class="bg-off">
+<main class="invite">
+  <img class="invite-logo" src="/assets/img/logo/justfamily-logo.png" alt="Just family">
+  <h1>Je bent uitgenodigd voor Just Family</h1>
+
+  <p class="invite-text" id="invite-intro" hidden>Je partner wil samen met jou het huishouden eerlijk verdelen. Open de uitnodiging in de app om mee te doen.</p>
+  <a class="btn btn-primary invite-open" id="invite-open" hidden>Open in de app</a>
+  <p class="invite-text" id="invite-error" role="alert" hidden>Deze uitnodigingslink is niet compleet. Vraag je partner om de link opnieuw te sturen.</p>
+
+  <section class="invite-stores">
+    <p>Nog geen app? Download Just Family en tik daarna opnieuw op de link in je bericht.</p>
+    <div class="badge-row">
+      <a href="https://apps.apple.com/nl/app/just-family-ai-organizer/id6742998095" target="_blank" rel="noopener noreferrer"><img src="/assets/img/badges/appstore.png" alt="Download in de App Store"></a>
+      <a href="https://play.google.com/store/apps/details?id=com.klaariskees.app" target="_blank" rel="noopener noreferrer"><img class="invite-badge-play" src="/assets/img/badges/googleplay.png" alt="Ontdek het op Google Play"></a>
+    </div>
+  </section>
+
+  <p class="invite-privacy"><a href="/privacybeleid.html">Privacybeleid</a></p>
+</main>
+<script src="/assets/js/uitnodiging.js"></script>
+</body>
+</html>
