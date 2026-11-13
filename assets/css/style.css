@@ -611,3 +611,34 @@ img.expert-avatar { border: 3px solid var(--color-off-white); }
 
 :focus-visible { outline: 3px solid var(--color-primary-blue); outline-offset: 2px; }
 .cookie-banner[hidden] { display: none; }
+
+/* ===== WhatsApp + app CTA ===== */
+.btn-whatsapp { background: #25D366; color: #0b2e1a; }
+.btn-whatsapp:hover { background: #1fbd5b; color: #0b2e1a; box-shadow: var(--shadow-soft); }
+.wa-icon { width: 22px; height: 22px; flex: none; background: currentColor;
+  -webkit-mask: url(/assets/img/icons/social/whatsapp.svg) center/contain no-repeat;
+  mask: url(/assets/img/icons/social/whatsapp.svg) center/contain no-repeat; }
+.cta-paths { display: flex; flex-direction: column; align-items: flex-start; gap: 18px; }
+.cta-path { display: flex; flex-direction: column; gap: 10px; }
+.cta-path .store-badges { margin-top: 0; }
+.cta-or { display: none; }
+.cta-note { margin: 0; font-size: var(--fs-small); color: #fff; opacity: .9; }
+.cta-secondary { margin-top: 20px; }
+.store-badges img[alt*="Google"] { height: 64px; }
+.cta-path .store-badges { align-items: center; }
+.start-choice { display: grid; grid-template-columns: repeat(2, minmax(0, 420px)); gap: 24px; justify-content: center; margin-top: 36px; }
+.start-card { background: rgba(255,255,255,.12); border-radius: var(--radius-m, 20px); padding: 28px; display: flex; flex-direction: column; align-items: center; gap: 16px; }
+.start-card h3 { margin: 0; color: #fff; }
+.start-card p { margin: 0; color: #fff; opacity: .92; }
+.start-card .start-hint { font-size: var(--fs-small); opacity: .8; }
+.start-card .btn { margin-top: auto; }
+.sticky-cta { display: none; }
+@media (max-width: 880px) {
+  .cta-or { display: none; }
+  .start-choice { grid-template-columns: 1fr; }
+  .sticky-cta { position: fixed; left: 0; right: 0; bottom: 0; z-index: 60; display: flex; gap: 10px; padding: 10px 16px calc(10px + env(safe-area-inset-bottom)); background: #fff; box-shadow: 0 -4px 16px rgba(0,0,0,.12); }
+  .sticky-cta[hidden] { display: none; }
+  .sticky-cta .btn { padding: 12px 18px; flex: 1; justify-content: center; }
+  .sticky-cta .btn-yellow { flex: 0 0 auto; }
+  body { padding-bottom: 0; }
+}
