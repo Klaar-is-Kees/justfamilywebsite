@@ -388,3 +388,29 @@ document.addEventListener('DOMContentLoaded', function () {
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 });
 
+
+/* ===== CTA: toon passende store-badge op mobiel, sticky balk na de hero ===== */
+(function () {
+  var ua = navigator.userAgent || '';
+  var os = /android/i.test(ua) ? 'android' : (/iPhone|iPad|iPod/i.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)) ? 'ios' : '';
+  if (os) {
+    document.querySelectorAll('[data-store-badges] [data-store]').forEach(function (a) {
+      if (a.getAttribute('data-store') !== os) a.hidden = true;
+    });
+  }
+  var bar = document.getElementById('sticky-cta');
+  var hero = document.querySelector('.hero');
+  var dl = document.getElementById('download');
+  if (bar && hero && 'IntersectionObserver' in window) {
+    var heroOut = false, dlIn = false;
+    var update = function () { bar.hidden = !(heroOut && !dlIn); };
+    new IntersectionObserver(function (e) { heroOut = !e[0].isIntersecting; update(); }).observe(hero);
+    if (dl) new IntersectionObserver(function (e) { dlIn = e[0].isIntersecting; update(); }).observe(dl);
+  }
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('[data-cta]');
+    if (!a) return;
+    var d = { event: 'cta_click', cta: a.getAttribute('data-cta') };
+    if (window.dataLayer) window.dataLayer.push(d);
+  });
+})();
