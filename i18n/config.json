@@ -15,7 +15,12 @@
   "extra_files": {
     "llms.txt": "llms.txt"
   },
-  "replacements": [],
+  "replacements": [
+    [
+      "text=Hoi%20Just%21%20Ik%20wil%20graag%20starten.",
+      "text=Hi%20Just%21%20I%27d%20like%20to%20get%20started."
+    ]
+  ],
   "exclude": [
     "campagne.html",
     "just-fair-check.html",
