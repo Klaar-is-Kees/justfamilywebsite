@@ -103,7 +103,7 @@
       </ul>
     </nav>
     <div class="nav-cta">
-      <a href="#download" class="btn btn-yellow">Download de app</a>
+      <a href="#download" class="btn btn-yellow" data-cta="header-app">Download de app</a>
       <a href="https://justfamily.nl/en/index.html" class="lang-switch" hreflang="en" aria-label="View this page in English">EN</a>
       <button class="nav-toggle btn btn-outline" aria-expanded="false" aria-label="Menu">Menu</button>
     </div>
@@ -119,14 +119,21 @@
         <span class="hero-eyebrow">Voor stellen &amp; gezinnen</span>
         <h1>Eindelijk een eerlijke verdeling thuis.</h1>
         <p class="lead" style="color:#fff; opacity:0.92;">Just opent het gesprek over wie wat doet thuis, en verdeelt het eerlijk. Zo word je een team en hou je weer tijd over voor elkaar.</p>
-        <div class="badge-row" style="margin-top:32px; margin-bottom:32px;">
-          <a href="#download" class="btn btn-yellow">Download de App</a>
-          <a href="/over-just.html" class="btn btn-outline" style="color:#fff;">Ons verhaal</a>
+        <div class="cta-paths" style="margin-top:32px;">
+          <div class="cta-path">
+            <a href="https://wa.me/31616213326?text=Hoi%20Just%21%20Ik%20wil%20graag%20starten." class="btn btn-whatsapp" target="_blank" rel="noopener noreferrer" data-cta="hero-whatsapp"><span class="wa-icon" aria-hidden="true"></span>Start via WhatsApp</a>
+            <p class="cta-note">Stuur &eacute;&eacute;n bericht. Gratis.</p>
+          </div>
+          <span class="cta-or" aria-hidden="true">of</span>
+          <div class="cta-path">
+            <div class="store-badges" data-store-badges>
+              <a href="https://apps.apple.com/nl/app/just-family-ai-organizer/id6742998095" data-store="ios" data-cta="bottom-appstore"><img src="/assets/img/badges/appstore.png" alt="Download in de App Store"></a>
+              <a href="https://play.google.com/store/apps/details?id=com.klaariskees.app&hl=nl" data-store="android" data-cta="bottom-googleplay"><img src="/assets/img/badges/googleplay.png" alt="Download in Google Play"></a>
+            </div>
+            <p class="cta-note">Liever alles in de app? Gratis voor iOS en Android.</p>
+          </div>
         </div>
-        <div class="store-badges">
-          <a href="#download"><img src="/assets/img/badges/appstore.png" alt="Download in de App Store"></a>
-          <a href="#download"><img src="/assets/img/badges/googleplay.png" alt="Download in Google Play"></a>
-        </div>
+        <p class="cta-secondary"><a href="/over-just.html" style="color:#fff;">Lees ons verhaal &rarr;</a></p>
       </div>
       <div>
         <img src="/assets/img/elien-van-riet-just-ai-family-organizer.jpg"
@@ -215,7 +222,10 @@
         <span class="eyebrow">In de app</span>
         <h2>Overzicht op elk moment van de dag</h2>
         <p>Zie in één oogopslag wie welke taken heeft, hoeveel tijd erin gaat zitten en wat er vandaag nog moet gebeuren voor het hele gezin.</p>
-        <a href="#download" class="btn btn-primary" style="margin-top:12px;">Probeer Just gratis</a>
+        <div class="badge-row" style="margin-top:12px;">
+          <a href="https://wa.me/31612673437?text=Hoi%20Just%21%20Ik%20wil%20graag%20starten." class="btn btn-whatsapp" target="_blank" rel="noopener noreferrer" data-cta="mid-whatsapp"><span class="wa-icon" aria-hidden="true"></span>Probeer via WhatsApp</a>
+          <a href="#download" class="btn btn-outline" data-cta="mid-app">Download de app</a>
+        </div>
       </div>
       <div class="screens-morph" data-reveal role="img" aria-label="Afwisselende schermafbeeldingen van de taakverdeling, de kalender en een voltooide dag in de Just-app">
         <img class="morph-frame morph-frame--1" src="/assets/img/screens/morph-taakverdeling.png" alt="" aria-hidden="true">
@@ -322,21 +332,30 @@
     </div>
   </section>
 
-  <!-- ============ DOWNLOAD CTA ============ -->
+  <!-- ============ START CTA (WhatsApp + app) ============ -->
   <section class="section bg-blue" id="download">
     <div class="container text-center">
       <h2>Begin vandaag nog met eerlijk verdelen</h2>
-      <p class="lead mx-auto" style="color:#fff; opacity:0.9;">Gratis te downloaden voor iOS en Android.</p>
-      <div class="store-badges" style="justify-content:center; margin-top:24px;">
-        <a href="https://apps.apple.com/nl/app/klaar-is-kees/id0000000000"><img src="/assets/img/badges/appstore.png" alt="Download in de App Store"></a>
-        <a href="https://play.google.com/store/apps"><img src="/assets/img/badges/googleplay.png" alt="Download in Google Play"></a>
+      <p class="lead mx-auto" style="color:#fff; opacity:0.9;">Kies hoe je Just het liefst gebruikt. Allebei gratis.</p>
+      <div class="start-choice">
+        <div class="start-card">
+          <h3>Via WhatsApp</h3>
+          <p>Voeg Just toe aan je WhatsApp en stuur een bericht. Geen download, geen account vooraf.</p>
+          <a href="https://wa.me/31612673437?text=Hoi%20Just%21%20Ik%20wil%20graag%20starten." class="btn btn-whatsapp" target="_blank" rel="noopener noreferrer" data-cta="bottom-whatsapp"><span class="wa-icon" aria-hidden="true"></span>Voeg Just toe op WhatsApp</a>
+          <p class="start-hint">Op je computer? Het opent WhatsApp Web of de desktop-app.</p>
+        </div>
+        <div class="start-card">
+          <h3>In de app</h3>
+          <p>Het volledige overzicht met taakverdeling, kalender en to-do&rsquo;s, voor jou en je partner.</p>
+          <div class="store-badges" data-store-badges style="justify-content:center; margin-top:0;">
+            <a href="https://apps.apple.com/nl/app/just-family-ai-organizer/id6742998095" data-store="ios" data-cta="bottom-appstore"><img src="/assets/img/badges/appstore.png" alt="Download in de App Store"></a>
+            <a href="https://play.google.com/store/apps/details?id=com.klaariskees.app&hl=nl" data-store="android" data-cta="bottom-googleplay"><img src="/assets/img/badges/googleplay.png" alt="Download in Google Play"></a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-
-  <!-- Anker voor oude links (/index.html#download) die naar de aanmeldsectie moeten blijven wijzen -->
-  <span id="download"></span>
   <!-- ============ AANMELDEN VOOR DE AI-AGENT ============ -->
  <!-- <section class="section bg-blue" id="aanmelden">
     <div class="container text-center">
@@ -410,6 +429,11 @@
     </div>
   </div>
 </footer>
+
+<div class="sticky-cta" id="sticky-cta" hidden>
+  <a href="https://wa.me/31612673437?text=Hoi%20Just%21%20Ik%20wil%20graag%20starten." class="btn btn-whatsapp" target="_blank" rel="noopener noreferrer" data-cta="sticky-whatsapp"><span class="wa-icon" aria-hidden="true"></span>Start via WhatsApp</a>
+  <a href="#download" class="btn btn-yellow" data-cta="sticky-app">App</a>
+</div>
 
 <div class="cookie-banner" id="cookie-banner" hidden role="dialog" aria-label="Cookiemelding">
   <p>We gebruiken alleen functionele cookies om de site goed te laten werken. Lees ons <a href="/cookiebeleid.html">cookiebeleid</a>.</p>
