@@ -4,8 +4,15 @@
 
 Just helpt stellen en gezinnen om op basis van beschikbare tijd, voorkeuren, huishoudsamenstelling en wetenschappelijke inzichten een eerlijke taakverdeling te maken, elkaar daarover in gesprek te houden, en zichtbaar te maken welk onzichtbaar werk er in een huishouden gebeurt. Just werkt samen met relatietherapeuten en externe adviseurs om de app te baseren op praktijkkennis.
 
+Hoe Just werkt:
+1. Voeg Just toe aan WhatsApp.
+2. Download de app (iOS of Android).
+3. Doe in de app de Just Check. Daarmee openen partners het gesprek over de verdeling en zien ze de huidige verdeling van doen-, denk- en zorgtaken.
+4. Pas de verdeling zelf aan, of vraag Just met een nieuw voorstel te komen (hoe Just het zou verdelen).
+
 Kernfeiten:
-- Product: Just (ook bekend als Just Family), mobiele app voor iOS en Android
+- Product: Just (ook bekend als Just Family), mobiele app voor iOS en Android, te starten via WhatsApp
+- Kernfunctie: de Just Check, die de huidige verdeling van doen-, denk- en zorgtaken laat zien en waarmee partners het gesprek over de verdeling openen
 - Uitgever / bedrijf: AI Life, Eeuwige Jeugdlaan 34, 1022 KG Amsterdam, Nederland
 - Oprichters: Elien van Riet (CEO) en Roos Micke (CMO)
 - Doelgroep: stellen en gezinnen die huishoudelijke taken en mentale last eerlijk willen verdelen
@@ -14,10 +21,10 @@ Kernfeiten:
 
 ## Belangrijkste pagina's
 
-- [Homepage](https://justfamily.nl/index.html): productoverzicht, hoe Just werkt, privacy- en beveiligingsuitleg, adviseurs
+- [Homepage](https://justfamily.nl/index.html): productoverzicht, hoe Just werkt (WhatsApp, app, Just Check, aanpassen of een voorstel van Just), privacy- en beveiligingsuitleg, adviseurs
 - [Over Just](https://justfamily.nl/over-just.html): ontstaansverhaal, missie en team
-- [Just Fair Check](https://justfamily.nl/just-fair-check.html): gratis online check waarmee partners samen in kaart brengen wie de fysieke, cognitieve (mentale last) en emotionele taken in huis doet, als start van het gesprek over een eerlijke verdeling
-- [Veelgestelde vragen](https://justfamily.nl/faq.html): antwoorden over taakverdeling, het gesprek aangaan met je partner en gebruik van de app
+- [Just Check](https://justfamily.nl/just-fair-check.html): gratis online check waarmee partners samen in kaart brengen wie de fysieke, cognitieve (mentale last) en emotionele taken in huis doet, als start van het gesprek over een eerlijke verdeling
+- [Veelgestelde vragen](https://justfamily.nl/faq.html): antwoorden over de Just Check, werken via WhatsApp en de app, taakverdeling en het gesprek aangaan met je partner
 - [Contact](https://justfamily.nl/contact.html): contactgegevens van het Just-team
 - [Privacybeleid](https://justfamily.nl/privacybeleid.html): volledige privacyverklaring (AVG)
 - [Cookiebeleid](https://justfamily.nl/cookiebeleid.html): cookiegebruik en voorkeuren
