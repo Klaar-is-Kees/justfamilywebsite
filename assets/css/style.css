@@ -4,20 +4,84 @@
    ========================================================================== */
 
 :root {
+  /* --- Just Family app-designsysteem (tokens v2.1) ---
+     Dezelfde tokennamen als in de app, met prefix --jf-.
+     De website-variabelen hieronder verwijzen naar deze tokens waar de
+     waarde exact gelijk is. Tokens die (nog) afwijken van de website
+     staan hier wel, maar worden nog niet gebruikt: zie RESPONSIVE_REVIEW.md. */
+  --jf-bg: #FBFAF3;
+  --jf-surface: #FFFFFF;
+  --jf-surface-muted: #F2EFEA;
+  --jf-text: #39393A;
+  --jf-text-muted: #6B645F;
+  --jf-border: #E6E1DA;
+  --jf-border-strong: #8A817C;
+  --jf-action: #3D63E6;
+  --jf-action-pressed: #2F4FC0;
+  --jf-on-action: #FFFFFF;
+  --jf-brand: #3D63E6;
+  --jf-brand-web: #5578F6;
+  --jf-progress: #5578F6;
+  --jf-accent: #F9D22D;
+  --jf-on-accent: #39393A;
+  --jf-accent-strong: #946C00;
+  --jf-now-line: #946C00;
+  --jf-success: #137336;
+  --jf-success-soft: #E8F5EC;
+  --jf-warning: #B45309;
+  --jf-warning-soft: #FEF3C7;
+  --jf-danger: #B42318;
+  --jf-danger-soft: #FDECEA;
+  --jf-disabled-bg: #E6E6E6;
+  --jf-disabled-text: #6B645F;
+  --jf-pressed-overlay: rgba(57, 57, 58, 0.08);
+  --jf-person-1: #3730A3;
+  --jf-person-2: #C4501B;
+  --jf-person-3: #0F7B6C;
+  --jf-person-4: #F2C230;
+  --jf-person-5: #B9A0EE;
+  --jf-person-6: #8FD8E8;
+  --jf-person-7: #7A1F2B;
+  --jf-person-8: #1F2A6B;
+
+  --jf-font-display: Manrope, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --jf-font-text: system-ui, -apple-system, "SF Pro Text", Roboto, "Segoe UI", sans-serif;
+
+  --jf-space-1: 4px;
+  --jf-space-2: 8px;
+  --jf-space-3: 12px;
+  --jf-space-4: 16px;
+  --jf-space-5: 20px;
+  --jf-space-6: 24px;
+  --jf-space-8: 32px;
+  --jf-space-10: 40px;
+  --jf-space-12: 48px;
+
+  --jf-radius-sm: 8px;
+  --jf-radius-md: 12px;
+  --jf-radius-lg: 20px;
+  --jf-radius-xl: 28px;
+  --jf-radius-pill: 999px;
+
+  --jf-shadow-card: 0 1px 3px rgba(57, 57, 58, 0.08);
+  --jf-shadow-raised: 0 8px 24px rgba(57, 57, 58, 0.18);
+
+  --jf-size-touch: 44px;
+
   /* --- kleuren (exact overgenomen palet) --- */
-  --color-primary-blue: #5578f6;
-  --color-mustard-yellow: #f9d22d;
+  --color-primary-blue: var(--jf-brand-web);       /* #5578f6 */
+  --color-mustard-yellow: var(--jf-accent);        /* #f9d22d */
   --color-old-pink: #eb91b7;
   --color-orange: #ea5f38;
-  --color-soft-black: #39393a;
+  --color-soft-black: var(--jf-text);              /* #39393a */
   --color-light-grey: #e6e6e6;
   --color-middle-grey: #bcb8b1;
   --color-teal: #095550;
   --color-sky: #71c9e4;
-  --color-off-white: #fbfaf3;
+  --color-off-white: var(--jf-bg);                 /* #fbfaf3 */
 
   --color-text: var(--color-soft-black);
-  --color-bg: #ffffff;
+  --color-bg: var(--jf-surface);                   /* #ffffff */
   --color-bg-alt: var(--color-off-white);
 
   /* --- typografie --- */
@@ -29,10 +93,10 @@
   --fs-xxl: clamp(2.15rem, 1.6rem + 2vw, 3rem);
   --fs-hero: clamp(2.4rem, 1.8rem + 3vw, 4rem);
 
-  --radius-s: 12px;
-  --radius-m: 20px;
+  --radius-s: var(--jf-radius-md);                 /* 12px */
+  --radius-m: var(--jf-radius-lg);                 /* 20px */
   --radius-l: 32px;
-  --radius-full: 999px;
+  --radius-full: var(--jf-radius-pill);            /* 999px */
 
   --shadow-soft: 0 20px 45px -20px rgba(57, 57, 58, 0.25);
   --container-w: 1180px;
@@ -135,7 +199,9 @@ ul { padding-left: 1.2em; }
 .nav-cta { display: flex; align-items: center; gap: 14px; }
 .nav-toggle { display: none; }
 
-@media (max-width: 880px) {
+/* Menu-knop tot 1100px: daarboven past de volledige navigatie op één regel,
+   daaronder liep hij over twee regels en schoof het logo eroverheen. */
+@media (max-width: 1100px) {
   .nav-links { display: none; }
   .nav-links--open {
     display: flex; flex-direction: column; gap: 16px;
@@ -167,7 +233,7 @@ ul { padding-left: 1.2em; }
 }
 .hero-lottie { width: 100%; max-width: 560px; margin: 0 auto; }
 .store-badges { display: flex; gap: 14px; margin-top: 28px; flex-wrap: wrap; }
-.store-badges img { height: 52px; width: auto; }
+.store-badges img { height: 40px; width: auto; } /* minimumhoogte volgens de richtlijnen van Apple; beide badges even groot */
 
 .hero-grid {
   display: grid;
@@ -340,6 +406,10 @@ ul { padding-left: 1.2em; }
 }
 @media (max-width: 640px) {
   .carousel-btn { display: none; }
+  /* Pijlen zijn hier verborgen; de stipjes zijn dan de enige knoppen.
+     Onzichtbaar groter tikvlak (32px hoog), het stipje zelf blijft 8px. */
+  .carousel-dots button { position: relative; }
+  .carousel-dots button::before { content: ""; position: absolute; inset: -12px -4px; }
 }
 .expert-card {
   background: #fff;
@@ -409,6 +479,13 @@ img.expert-avatar { border: 3px solid var(--color-off-white); }
   font-size: var(--fs-small); opacity: 0.7;
 }
 @media (max-width: 880px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
+/* Smalle telefoons (<375px): de rij social-iconen (196px) duwde de tweede
+   kolom buiten beeld. Iconen mogen hier doorlopen naar een tweede regel. */
+@media (max-width: 374px) {
+  .footer-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .footer-grid .social-links { flex-wrap: wrap; }
+  .footer-grid a { overflow-wrap: anywhere; }
+}
 
 /* ---------- Social icons ---------- */
 .social-links {
@@ -455,7 +532,11 @@ img.expert-avatar { border: 3px solid var(--color-off-white); }
 .legal-content nav.toc { background: var(--color-off-white); border-radius: var(--radius-m); padding: 24px 28px; margin: 24px 0; }
 .legal-content nav.toc ol { columns: 2; gap: 24px; }
 .legal-content a { color: var(--color-primary-blue); text-decoration: underline; }
-@media (max-width: 600px) { .legal-content nav.toc ol { columns: 1; } }
+@media (max-width: 600px) {
+  .legal-content nav.toc ol { columns: 1; }
+  /* lange URL's (bijv. support.google.com/...) breken af in plaats van buiten beeld te lopen */
+  .legal-content a { overflow-wrap: anywhere; }
+}
 
 /* ---------- Utility ---------- */
 .text-center { text-align: center; }
@@ -632,7 +713,6 @@ img.expert-avatar { border: 3px solid var(--color-off-white); }
 .cta-or { display: none; }
 .cta-note { margin: 0; font-size: var(--fs-small); color: #fff; opacity: .9; }
 .cta-secondary { margin-top: 20px; }
-.store-badges img[alt*="Google"] { height: 64px; }
 .cta-path .store-badges { align-items: center; }
 .start-choice { display: grid; grid-template-columns: repeat(2, minmax(0, 420px)); gap: 24px; justify-content: center; margin-top: 36px; }
 .start-card { background: rgba(255,255,255,.12); border-radius: var(--radius-m, 20px); padding: 28px; display: flex; flex-direction: column; align-items: center; gap: 16px; }
@@ -649,4 +729,21 @@ img.expert-avatar { border: 3px solid var(--color-off-white); }
   .sticky-cta .btn { padding: 12px 18px; flex: 1; justify-content: center; }
   .sticky-cta .btn-yellow { flex: 0 0 auto; }
   body { padding-bottom: 0; }
+}
+
+/* ===== Telefoons (≤600px): rustiger en compacter ===== */
+@media (max-width: 600px) {
+  /* Header: logo houdt zijn verhouding, geen dubbele downloadknop, kleinere menuknop */
+  .logo, .logo img { flex-shrink: 0; }
+  .nav-cta .btn-yellow { display: none; }
+  .site-header .container { padding-top: 10px; padding-bottom: 10px; }
+  .nav-toggle { padding: 10px 20px; }
+
+  /* Tekst: minder groot op een klein scherm */
+  body { font-size: 1.0625rem; }
+  h1 { font-size: 2.125rem; }
+  .lead { font-size: 1.25rem; }
+
+  /* Knoppen: minder massief, ruim boven de 44px tikhoogte */
+  .btn { padding: 13px 24px; }
 }
